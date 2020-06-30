@@ -1,0 +1,33 @@
+<h2> Flats</h2>
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Id </th>
+      <th scope="col">Number </th>
+      <th scope="col">Floor </th>
+      <th scope="col">Rooms Count </th>
+      <th scope="col">Tenants Count </th>
+      <th scope="col">Total area </th>
+      <th scope="col">Living area </th>
+      <th scope="col">HouseId </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="flatsValues?.length == 0"><td>No data</td></tr>
+    <tr *ngFor="let value of flatsValues">
+      <td>{{ value["id"] }}</td>
+      <td>{{ value["num"] }}</td>
+      <td>{{ value["floor"] }}</td>
+      <td>{{ value["roomsCount"] }}</td>
+      <td>{{ value["tenantsCount"] }}</td>
+      <td>{{ value["totalArea"] }}</td>
+      <td>{{ value["livingArea"] }}</td>
+      <td>{{ value["houseId"] }}</td>
+      <td>
+        <a href="#" class="m-1" (click)="editF(value)">Edit</a>
+        <a href="#" class="m-2" (click)="deleteF(value)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button type="button" class="btn btn-primary mb-2" (click)="newF($event)">New</button>

@@ -1,0 +1,33 @@
+<h1>{{title}}</h1>
+<section class="jumbotron">
+    <div class="container">
+        <div class="row">
+          <div class="col-md-2">
+            <app-add-update-houses (houseCreated)="createUpdateHouse($event)" [house]="currentHouse"></app-add-update-houses>
+          </div>
+            <div class="col-md-10">
+              <app-houses [house]="houses" (editClicked)="editHouse($event)" (newClicked)="newHouse($event)" (recordDeleted)="deleteHouse($event)"></app-houses>
+            </div>       
+      </div>
+      <p></p>   
+      <div class="row">
+        <div class="col-md-2">
+          <app-add-update-flats (flatCreated)="createUpdateFlat($event)" [flat]="currentFlat"></app-add-update-flats>
+        </div>
+          <div class="col-md-10">
+            <app-flats [flatsValues]="flats" (editClicked)="editFlat($event)" (newClicked)="newFlat($event)" (recordDeleted)="deleteFlat($event)"></app-flats>
+          </div>       
+    </div>  
+    <p></p>   
+    <div class="row">
+      <div class="col-md-2">
+        <app-add-update-tenants (tenantCreated)="createUpdateTenant($event)" [tenant]="currentTenant"></app-add-update-tenants>
+      </div>
+        <div class="col-md-10">
+          <app-tenants [tenant]="tenants" (editClicked)="editTenant($event)" (newClicked)="newTenant($event)" (recordDeleted)="deleteTenant($event)"></app-tenants>
+        </div>       
+  </div> 
+    </div>
+  </section>
+<div>
+</div>

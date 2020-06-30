@@ -1,0 +1,36 @@
+<h2> Tenants </h2>
+
+<table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Id </th>
+        <th scope="col">First name </th>
+        <th scope="col">Last name </th>
+        <th scope="col">Personal code </th>
+        <th scope="col">Date of birth </th>
+        <th scope="col">Phone number </th>
+        <th scope="col">eMail </th>
+        <th scope="col">FlatId </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="tenant?.length == 0"><td>No data</td></tr>
+      <tr *ngFor="let value of tenant">
+        <td>{{ value["id"] }}</td>
+        <td> {{ value["firstName"] }}</td>
+        <td>{{ value["lastName"] }}</td>
+        <td>{{ value["personalCode"] }}</td>
+        <td>{{ value["dateOfBirst"] }}</td>
+        <td>{{ value["phoneNumber"] }}</td>
+        <td>{{ value["eMail"] }}</td>
+        <td>{{ value["flatId"] }}</td>
+        <td>
+          <a href="#" class="m-1" (click)="editT(value)">Edit</a>
+          <a href="#" class="m-2" (click)="deleteT(value)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary mb-2" (click)="newT($event)">New</button>
+  
+

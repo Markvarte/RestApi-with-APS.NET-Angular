@@ -1,0 +1,27 @@
+<div>
+    <h2 *ngIf="!house || house.id === undefined">Add </h2>
+    <h2 *ngIf="house && house.id !== undefined">Update </h2>
+    <form>
+      <div class="form-group">
+        <label for="num-input">House number:</label>
+        <input name="num" type="number" id="num-input" [(ngModel)]="house.num" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="street-input">Street:</label>
+        <input name="street" type="text" id="street-input" [(ngModel)]="house.street" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="sity-input">Sity:</label>
+        <input name="sity" type="text" id="sity-input" [(ngModel)]="house.sity" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="country-input">Country:</label>
+        <input name="country" type="text" id="country-input" [(ngModel)]="house.country" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="pcode-input">Post code:</label>
+        <input name="pcode" type="text" id="pcode-input" [(ngModel)]="house.postCode" class="form-control" />
+      </div>
+      <button type="button" class="btn btn-primary" (click)="addUpdateHouses($event);">Save</button>
+    </form>
+  </div>
