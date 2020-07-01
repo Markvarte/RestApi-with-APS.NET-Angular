@@ -118,20 +118,15 @@ export class AppComponent {
   public newTenant(house: Tenant) { // blank
     this.currentTenant = house;
   };
-  public deleteTenant(record) {
+  public deleteTenant(record : Tenant) {
     const deleteIndex = _.findIndex(this.tenants, { id: record.id });
     this.houseService.remove(record, "Tenants").subscribe(
       () => this.tenants.splice(deleteIndex, 1)
     );
   }
 
-  public deleteFlat(record: Flat) {
-    const deleteIndex = _.findIndex(this.flats, { id: record.id });
-    this.houseService.remove(record, "Flats").subscribe(
-      () => this.flats.splice(deleteIndex, 1)
-    );
-  }
-  public deleteHouse(record) {
+ 
+  public deleteHouse(record : House) {
     const deleteIndex = _.findIndex(this.houses, { id: record.id });
     this.houseService.remove(record, "Houses").subscribe(
       () => this.houses.splice(deleteIndex, 1)

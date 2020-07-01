@@ -15,10 +15,11 @@ export class HousesComponent implements OnInit {
    //}
 
   @Input() house: Array<House>;
+ 
   @Output() recordDeleted = new EventEmitter<House>(); // sent when click on delete ? 
   @Output() newClicked = new EventEmitter<House>(); // sent when click on new ? 
   @Output() editClicked = new EventEmitter<House>(); // sent when click on edit ? 
-   
+  showFlats : number = null; // initial value
   //housesValues: House;
  
   public deleteH(data) {
@@ -29,6 +30,11 @@ export class HousesComponent implements OnInit {
   }
   public newH(data) { // new is blank for now
     this.newClicked.emit(data);
+  }
+
+  public getConnectedFlats(data : number) { 
+    this.showFlats = data;
+
   }
 
  // getHouses(): void {

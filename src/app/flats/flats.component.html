@@ -1,4 +1,8 @@
-<h2> Flats</h2>
+<div *ngIf="show">
+
+  <div class="row">
+  <div class="col-md-10">
+  <h2> Connected flats</h2>
 <table class="table mt-5">
   <thead>
     <tr>
@@ -9,12 +13,12 @@
       <th scope="col">Tenants Count </th>
       <th scope="col">Total area </th>
       <th scope="col">Living area </th>
-      <th scope="col">HouseId </th>
+      <th scope="col">House ID </th> 
+      <th scope="col">Tenants </th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngIf="flatsValues?.length == 0"><td>No data</td></tr>
-    <tr *ngFor="let value of flatsValues">
+  <tbody *ngFor="let value of flatsValues">
+      <tr *ngIf="value['houseId'] === show">
       <td>{{ value["id"] }}</td>
       <td>{{ value["num"] }}</td>
       <td>{{ value["floor"] }}</td>
@@ -22,7 +26,8 @@
       <td>{{ value["tenantsCount"] }}</td>
       <td>{{ value["totalArea"] }}</td>
       <td>{{ value["livingArea"] }}</td>
-      <td>{{ value["houseId"] }}</td>
+       <td>{{ value["houseId"] }}</td>
+       <td> <button type="button" class="btn btn-primary mb-2" (click)="getConnectedTenants(value.id)">view tenants</button> </td> 
       <td>
         <a href="#" class="m-1" (click)="editF(value)">Edit</a>
         <a href="#" class="m-2" (click)="deleteF(value)">Delete</a>
@@ -31,3 +36,16 @@
   </tbody>
 </table>
 <button type="button" class="btn btn-primary mb-2" (click)="newF($event)">New</button>
+</div>
+
+
+<div class="col-md-2">
+  <app-add-update-flats (flatCreated)="createUpdateFlat($event)" [flat]="currentFlat"></app-add-update-flats>
+</div> 
+</div>
+</div>
+
+<div>
+  <app-tenants [TenantVisible]="flatIdForT" ></app-tenants>
+</div>
+

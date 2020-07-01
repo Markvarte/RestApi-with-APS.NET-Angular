@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Http } from '@angular/http'
-import { Flat } from './flat';
+import { Flat, DefaultFlat } from './flat';
+import { FlatsService } from '../flats.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-flats',
@@ -8,20 +10,56 @@ import { Flat } from './flat';
   styleUrls: ['./flats.component.css']
 })
 export class FlatsComponent implements OnInit { // nu very похоже на этот house Component
+
+  constructor(private flatService : FlatsService) {
+    flatService.get().subscribe((data: Array<Flat>) => this.flatsValues = data);
+    this.currentFlat = this.getDefaultFlat(); 
+  }
+  flatIdForT : number = null;
  
   @Input() flatsValues: Array<Flat>;
-  @Output() recordDeleted = new EventEmitter<Flat>(); // sent when click on delete ? 
-  @Output() newClicked = new EventEmitter<Flat>(); // sent when click on new ? 
-  @Output() editClicked = new EventEmitter<Flat>(); // sent when click on edit ? 
+  @Input() show: number; // for flat list / contains house id ? - yes
+  public currentFlat: Flat;
+  public getConnectedTenants(data : number) { 
+    this.flatIdForT = data;
 
-  public deleteF(data) {
-    this.recordDeleted.emit(data);
   }
-  public editF(data) {
-    this.editClicked.emit(Object.assign({}, data)); // for not reactive forms
+
+  private getDefaultFlat() : Flat {
+    return new DefaultFlat();
   }
-  public newF(data) { // new is blank for now
-    this.newClicked.emit(data);
+
+  public createUpdateFlat(flat: Flat) {
+    flat.houseId = this.show; // inicialize in new object house id 
+    let flatWithId = _.find(this.flatsValues, (el => el.id === flat.id));
+    if (flatWithId) {
+      const updateIndex = _.findIndex(this.flatsValues, { id: flatWithId.id });
+      this.flatService.update(flat).subscribe(() => {
+        this.flatsValues.splice(updateIndex, 1, flat);
+      }
+      );
+    } else {
+      flat.id = this.flatsValues[this.flatsValues.length - 1].id + 1; // solution for Internal server error
+      this.flatService.add(flat).subscribe(
+        () => {
+          this.flatsValues.push(flat)
+        }
+      );
+    }
+    this.currentFlat = this.getDefaultFlat();
+  };
+
+  public deleteF(data : Flat) {
+    const deleteIndex = _.findIndex(this.flatsValues, { id: data.id });
+    this.flatService.remove(data).subscribe(
+      () => this.flatsValues.splice(deleteIndex, 1)
+    );
+  }
+  public editF(data : Flat) {
+    this.currentFlat = data;
+  }
+  public newF(data : Flat) { // cleans form if it contains any info
+    this.currentFlat = data;
   }
     ngOnInit() {
     

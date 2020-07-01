@@ -1,30 +1,30 @@
 <div>
-    <h2 *ngIf="!myTenant?.id">Add </h2>
-    <h2 *ngIf="myTenant && myTenant.id">Update </h2>
+    <h2 *ngIf="!tenant?.id">Add </h2>
+    <h2 *ngIf="tenant && tenant.id">Update </h2>
     <form>
       <div class="form-group">
         <label for="firstName-input">Tenant first name:</label>
-        <input name="firstName" type="string" id="firstName-input" [(ngModel)]="myTenant.firstName" class="form-control" />
+        <input name="firstName" type="string" id="firstName-input" [(ngModel)]="tenant.firstName" class="form-control" />
       </div>
       <div class="form-group">
         <label for="lastName-input">Tenant last name:</label>
-        <input name="lastName" type="string" id="lastName-input" [(ngModel)]="myTenant.lastName" class="form-control" />
+        <input name="lastName" type="string" id="lastName-input" [(ngModel)]="tenant.lastName" class="form-control" />
       </div>
       <div class="form-group">
         <label for="personalCode-input">Personal Code:</label>
-        <input name="personalCode" type="string" id="personalCode-input" [(ngModel)]="myTenant.personalCode" class="form-control" />
+        <input name="personalCode" type="string" id="personalCode-input" [(ngModel)]="tenant.personalCode" class="form-control" />
       </div>
       <div class="form-group">
         <label for="dateOfBirst-input">Date of birth:</label>
-        <input name="dateOfBirst" type="string" id="dateOfBirst-input" [(ngModel)]="myTenant.dateOfBirst" class="form-control" />
+        <input name="dateOfBirst" type="string" id="dateOfBirst-input" [(ngModel)]="tenant.dateOfBirst" class="form-control" />
       </div>
       <div class="form-group">
         <label for="phoneNumber-input">Phone number:</label>
-        <input name="phoneNumber" type="string" id="phoneNumber-input" [(ngModel)]="myTenant.phoneNumber" class="form-control" />
+        <input name="phoneNumber" type="string" id="phoneNumber-input" [(ngModel)]="tenant.phoneNumber" class="form-control" />
       </div>
       <div class="form-group">
         <label for="eMail-input">eMail:</label>
-        <input name="eMail" type="string" id="eMail-input" [(ngModel)]="myTenant.eMail" class="form-control" />
+        <input name="eMail" type="string" id="eMail-input" [(ngModel)]="tenant.eMail" class="form-control" />
       </div>
       <div class="form-group">
         <label for="flatId-input">flatId:</label>

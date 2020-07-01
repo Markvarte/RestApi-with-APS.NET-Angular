@@ -9,6 +9,7 @@
         <th scope="col">Sity </th>
         <th scope="col">Country </th>
         <th scope="col">Post Code </th>
+        <th scope="col">Flats </th>
       </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
         <td>{{ value["sity"] }}</td>
         <td>{{ value["country"] }}</td>
         <td>{{ value["postCode"] }}</td>
+        <td> <button type="button" class="btn btn-primary mb-2" (click)="getConnectedFlats(value.id)">view flats</button> </td>
         <td>
           <a href="#" class="m-1" (click)="editH(value)">Edit</a>
           <a href="#" class="m-2" (click)="deleteH(value)">Delete</a>
@@ -29,3 +31,7 @@
   </table>
   <button type="button" class="btn btn-primary mb-2" (click)="newH($event)">New</button>
   
+  
+  <div>
+    <app-flats [show]="showFlats"></app-flats>
+</div>

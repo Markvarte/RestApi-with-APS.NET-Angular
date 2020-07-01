@@ -1,4 +1,7 @@
-<h2> Tenants </h2>
+<div *ngIf="TenantVisible">
+  <div class ="row">
+   <div class="col-md-10">
+<h2> Connected tenants </h2>
 
 <table class="table mt-5">
     <thead>
@@ -13,9 +16,8 @@
         <th scope="col">FlatId </th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngIf="tenant?.length == 0"><td>No data</td></tr>
-      <tr *ngFor="let value of tenant">
+    <tbody *ngFor="let value of tenant">
+      <tr *ngIf="value['flatId'] === TenantVisible">
         <td>{{ value["id"] }}</td>
         <td> {{ value["firstName"] }}</td>
         <td>{{ value["lastName"] }}</td>
@@ -31,6 +33,12 @@
       </tr>
     </tbody>
   </table>
-  <button type="button" class="btn btn-primary mb-2" (click)="newT($event)">New</button>
-  
+  <button type="button" class="btn btn-primary mb-2" (click)="new($event)">New</button>
+</div>
+<p></p>
+  <div class="col-md-2">
+    <app-add-update-tenants (tenantCreated)="createUpdateTenant($event)" [tenant]="currentTenant"></app-add-update-tenants>
+  </div>
+  </div>
+</div>
 

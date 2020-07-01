@@ -14,6 +14,7 @@ export class AddUpdateFlatsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
   private clearFlat() {
     this.flat = new DefaultFlat();

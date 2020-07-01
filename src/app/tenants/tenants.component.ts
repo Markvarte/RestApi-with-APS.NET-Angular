@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Http } from '@angular/http'
-import { Tenant } from './tenant';
+import { Tenant, DefaultTenant } from './tenant';
 import { Flat } from '../flats/flat';
-import { HousesService } from '../houses.service';
-
+import { TenantsService } from '../tenants.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-tenants',
@@ -11,22 +11,51 @@ import { HousesService } from '../houses.service';
   styleUrls: ['./tenants.component.css']
 })
 export class TenantsComponent implements OnInit { 
-  
+  constructor(private tenantService : TenantsService) {
+    tenantService.get().subscribe((data: Array<Tenant>) => this.tenant = data);
+    this.currentTenant = this.getDefaultTenant();
+  }
 
-  
+  @Input() TenantVisible : number; // for tenant list / contains flat id ? - yes
   @Input() tenant: Array<Tenant>;
-  @Output() recordDeleted = new EventEmitter<Tenant>(); // sent when click on delete ? 
-  @Output() newClicked = new EventEmitter<Tenant>(); // sent when click on new ? 
-  @Output() editClicked = new EventEmitter<Tenant>(); // sent when click on edit ? 
+  public currentTenant: Tenant;
 
-  public deleteT(data) {
-    this.recordDeleted.emit(data);
+  private getDefaultTenant() {
+    return new DefaultTenant();
   }
-  public editT(data) {
-    this.editClicked.emit(Object.assign({}, data));
+
+  public createUpdateTenant(data: Tenant) {
+
+    data.flatId = this.TenantVisible;
+    let tenantWithId = _.find(this.tenant, (el => el.id === data.id));
+    if (tenantWithId) {
+      const updateIndex = _.findIndex(this.tenant, { id: tenantWithId.id });
+      this.tenantService.update(data).subscribe(() => {
+         this.tenant.splice(updateIndex, 1, data)
+      });
+    } else {
+      data.id = this.tenant[this.tenant.length - 1].id + 1; // solution for Internal server error
+      this.tenantService.add(data).subscribe(
+        () => {
+           this.tenant.push(data);
+        }
+      );
+    }
+    this.currentTenant = this.getDefaultTenant();
+  };
+
+  public deleteT(data : Tenant) {
+    const deleteIndex = _.findIndex(this.tenant, { id: data.id });
+    this.tenantService.remove(data).subscribe(
+      () => this.tenant.splice(deleteIndex, 1)
+    );
   }
-  public newT(data) { // new is blank for now
-    this.newClicked.emit(data);
+  public editT(data : Tenant) {
+   // this.editClicked.emit(Object.assign({}, data));
+   this.currentTenant = data;
+  }
+  public new(data : Tenant) { // new is blank for now
+    this.currentTenant = data;
   }
     ngOnInit() {}
 }

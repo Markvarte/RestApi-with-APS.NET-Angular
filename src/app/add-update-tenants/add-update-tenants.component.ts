@@ -3,6 +3,7 @@ import { Tenant, DefaultTenant } from '../tenants/tenant';
 import { HousesService } from '../houses.service';
 import { Flat } from '../flats/flat';
 import { FlatsService } from '../flats.service';
+import { TenantsService } from '../tenants.service';
 
 @Component({
   selector: 'app-add-update-tenants',
@@ -10,8 +11,7 @@ import { FlatsService } from '../flats.service';
   styleUrls: ['./add-update-tenants.component.css']
 })
 export class AddUpdateTenantsComponent implements OnInit{
-  constructor(private flatService: FlatsService) { // houses service .. :(
-    flatService.get().subscribe((data: Array<Flat>) => this.flats = data);
+  constructor() { 
     this.clearTenants();
   }
   /**
@@ -28,13 +28,9 @@ export class AddUpdateTenantsComponent implements OnInit{
    * @memberof AddUpdateTenantsComponent
    */
   @Input() tenant: Tenant;
-  public flats: Array<Flat>;
-  myTenant: any = {};
 
   ngOnInit(): void {
-    console.log(this.tenant);
-    Object.assign(this.myTenant, this.tenant);
-    this.myTenant.flatId = 5;
+
   }
 
   /**
@@ -43,15 +39,10 @@ export class AddUpdateTenantsComponent implements OnInit{
    * @memberof AddUpdateTenantsComponent
    */
   addUpdateTenants() {
-    console.log(this.myTenant);
-    this.tenantCreated.emit(this.myTenant);
-    // this.clearTenants();
+    this.tenantCreated.emit(this.tenant);
+    this.clearTenants();
   }
 
-
-  changeId(flat: Flat) {
-    this.myTenant["flatId"] = flat["id"];
-  }
   /**
    * Method clears tenant ...
    *
