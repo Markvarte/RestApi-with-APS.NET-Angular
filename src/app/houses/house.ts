@@ -8,7 +8,7 @@ export interface House {
 }
 export class DefaultHouse implements House {
   id: number= null;
-  num: number = 0;
+  num: number = null;
   street: string = '';
   sity: string = '';
   country: string = '';

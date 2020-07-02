@@ -1,0 +1,11 @@
+<form [formGroup]="newHouseForm">
+  <input type="number" formControlName="num">
+  <div class="text-danger" *ngIf="newHouseForm.get('num').errors && newHouseForm.get('num').touched">
+    Number is required
+  </div>
+  <input type="text" formControlName="street">
+  <input type="text" formControlName="sity">
+  <input type="text" formControlName="country">
+  <input type="text" formControlName="postCode">
+  <button class="btn btn-primary" [disabled]="newHouseForm.invalid">Submit </button>
+</form>

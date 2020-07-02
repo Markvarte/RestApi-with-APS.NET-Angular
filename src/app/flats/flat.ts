@@ -12,10 +12,10 @@ export interface Flat {
 export class DefaultFlat implements Flat {
     id: number = null;
     num: string = '';
-    floor: number = 0;
-    roomsCount: number = 0;
-    tenantsCount: number = 0;
-    totalArea: number = 0;
-    livingArea: number = 0;
+    floor: number = null;
+    roomsCount: number = null;
+    tenantsCount: number = null;
+    totalArea: number = null;
+    livingArea: number = null;
     houseId: number = null;
 }

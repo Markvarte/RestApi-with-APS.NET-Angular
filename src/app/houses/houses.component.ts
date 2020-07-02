@@ -10,17 +10,16 @@ import { HousesService } from '../houses.service';
 })
 export class HousesComponent implements OnInit {
 
-  //constructor(private houseService: HousesService) { // don't sure it is necessary
-    //houseService.get().subscribe((data : House) => this.housesValues = data);
-   //}
+  // constructor(private houseService: HousesService) { // don't sure it is necessary
+    // houseService.get().subscribe((data : House) => this.housesValues = data);
+   // }
 
   @Input() house: Array<House>;
- 
-  @Output() recordDeleted = new EventEmitter<House>(); // sent when click on delete ? 
-  @Output() newClicked = new EventEmitter<House>(); // sent when click on new ? 
-  @Output() editClicked = new EventEmitter<House>(); // sent when click on edit ? 
-  showFlats : number = null; // initial value
-  //housesValues: House;
+  @Output() recordDeleted = new EventEmitter<House>(); // sent when click on delete ?
+  @Output() newClicked = new EventEmitter<House>(); // sent when click on new ?
+  @Output() editClicked = new EventEmitter<House>(); // sent when click on edit ?
+  showFlats: number = null; // initial value
+  // housesValues: House;
  
   public deleteH(data) {
     this.recordDeleted.emit(data);
@@ -32,14 +31,14 @@ export class HousesComponent implements OnInit {
     this.newClicked.emit(data);
   }
 
-  public getConnectedFlats(data : number) { 
+  public getConnectedFlats(data: number) {
     this.showFlats = data;
 
   }
 
  // getHouses(): void {
   //  this.houseService.get().subscribe((houses : House) => this.housesValues = houses);
-  //}
+  // }
   // addhouse(name: string): void {
  //   name = name.trim();
  // if (!name) { return; }

@@ -1,27 +1,46 @@
 <div>
     <h2 *ngIf="!house || house.id === undefined">Add </h2>
     <h2 *ngIf="house && house.id !== undefined">Update </h2>
-    <form>
+    <p *ngIf="isValidFormSubmitted" class="text-success">
+      Form submitted successfully.
+  </p>
+    
+    <form #userForm="ngForm" (ngSubmit)="addUpdateHouses(userForm)">
       <div class="form-group">
         <label for="num-input">House number:</label>
-        <input name="num" type="number" id="num-input" [(ngModel)]="house.num" class="form-control" />
+        <input name="num" type="number" id="num-input" [(ngModel)]="house.num" class="form-control" required #num="ngModel"/>
+        <div *ngIf="(num.invalid && num.touched) || (house.num <= 0 && num.touched)" class="text-danger"> 
+          invalid field. 
+         </div>
       </div>
       <div class="form-group">
         <label for="street-input">Street:</label>
-        <input name="street" type="text" id="street-input" [(ngModel)]="house.street" class="form-control" />
+        <input name="street" type="text" id="street-input" [(ngModel)]="house.street" class="form-control" required #street="ngModel"/>
+        <div *ngIf="street.invalid && street.touched" class="text-danger"> 
+          Field required. 
+         </div>
       </div>
       <div class="form-group">
         <label for="sity-input">Sity:</label>
-        <input name="sity" type="text" id="sity-input" [(ngModel)]="house.sity" class="form-control" />
+        <input name="sity" type="text" id="sity-input" [(ngModel)]="house.sity" class="form-control" required #sity="ngModel"/>
+        <div *ngIf="sity.invalid && sity.touched" class="text-danger"> 
+          Field required. 
+         </div>
       </div>
       <div class="form-group">
         <label for="country-input">Country:</label>
-        <input name="country" type="text" id="country-input" [(ngModel)]="house.country" class="form-control" />
+        <input name="country" type="text" id="country-input" [(ngModel)]="house.country" class="form-control" required #country="ngModel"/>
+        <div *ngIf="country.invalid && country.touched" class="text-danger"> 
+          Field required. 
+         </div>
       </div>
       <div class="form-group">
         <label for="pcode-input">Post code:</label>
-        <input name="pcode" type="text" id="pcode-input" [(ngModel)]="house.postCode" class="form-control" />
+        <input name="pcode" type="text" id="pcode-input" [(ngModel)]="house.postCode" class="form-control" required #pcode="ngModel"/>
+        <div *ngIf="pcode.invalid && pcode.touched" class="text-danger"> 
+          Field required. 
+         </div>
       </div>
-      <button type="button" class="btn btn-primary" (click)="addUpdateHouses($event);">Save</button>
+      <button type="submit" class="btn btn-primary">Save</button>
     </form>
   </div>

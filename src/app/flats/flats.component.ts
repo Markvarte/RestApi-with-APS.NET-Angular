@@ -20,7 +20,7 @@ export class FlatsComponent implements OnInit { // nu very похоже на э�
   @Input() flatsValues: Array<Flat>;
   @Input() show: number; // for flat list / contains house id ? - yes
   public currentFlat: Flat;
-  public getConnectedTenants(data : number) { 
+  public getConnectedTenants(data : number) {
     this.flatIdForT = data;
 
   }
