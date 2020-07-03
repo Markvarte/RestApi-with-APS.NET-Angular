@@ -17,8 +17,8 @@ export class AppComponent {
   public currentHouse: House;
 
 
-  constructor(private houseService: HousesService, private flatService: FlatsService, private tenantService: TenantsService) { // houses service .. :(
-    houseService.get("Houses").subscribe((data: Array<House>) => this.houses = data);
+  constructor(private houseService: HousesService) { // houses service .. :(
+    houseService.get('Houses').subscribe((data: Array<House>) => this.houses = data);
     this.currentHouse = this.getDefaultHouse();
   }
   title = 'Rest API';
