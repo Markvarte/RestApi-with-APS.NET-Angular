@@ -9,19 +9,18 @@ import { Flat, DefaultFlat } from '../flats/flat';
 export class AddUpdateFlatsComponent implements OnInit {
   @Output() flatCreated = new EventEmitter<Flat>();
   @Input() flat: Flat;
-  constructor() { 
+  constructor() {
     this.clearFlat();
   }
 
   ngOnInit(): void {
-    
   }
   private clearFlat() {
     this.flat = new DefaultFlat();
   }
-  public addUpdateFlats(event : Flat) { // all types are interface types
+  public addUpdateFlats() { // all types are interface types //event: Flat -> parametrs needed ? - no
   this.flatCreated.emit(this.flat); // sent to base component becouse of flatCreated event
   this.clearFlat();
-};
+}
 
 }

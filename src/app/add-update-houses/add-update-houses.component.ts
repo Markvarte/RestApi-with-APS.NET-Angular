@@ -1,7 +1,10 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { House, DefaultHouse } from '../houses/house';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
+import { NumberValidator } from '../numberValidator/number.validator';
+import { HousesService } from '../houses.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-update-houses',
@@ -13,8 +16,14 @@ export class AddUpdateHousesComponent implements OnInit {
   @Output() houseCreated = new EventEmitter<House>(); // react ang sent to autside data when event HouseCreated
   @Input() house: House; // save data in "house"
   isValidFormSubmitted = false; // for form validation
-  constructor() {
-    this.clearHouses(); // methon to create empty obj
+  newHouseForm: FormGroup;
+  constructor(
+    // this.clearHouses(), // methon to create empty obj
+    private formBuilder: FormBuilder,
+    private houseService: HousesService,
+    private route: ActivatedRoute,
+  ) {
+    this.createForm();
   }
 
   ngOnInit(): void {
@@ -24,14 +33,31 @@ export class AddUpdateHousesComponent implements OnInit {
     this.house = new DefaultHouse();
   }
 
-  public addUpdateHouses(form: NgForm) {
-    if (form.valid) {
-      this.addHouse(form.value);
-      this.isValidFormSubmitted = true;
+  public addUpdateHouses() {
+    if (this.newHouseForm.valid) {
+      if (this.newHouseForm.value.id === null) {
+        this.addHouse(this.newHouseForm.value);
+      } else {
+        this.updateHouse(this.newHouseForm.value);
+      }
+      this.isValidFormSubmitted = true; // for message "Form submitted successfully."
       // all types are interface types "House"
-      this.houseCreated.emit(this.house); // sent house to base component becouse of houseCreated event
-      this.clearHouses();
+      //  this.houseCreated.emit(this.house); // sent house to base component becouse of houseCreated event
+      // this.clearHouses();
+      this.newHouseForm.reset();
     }
+  }
+
+
+
+  private createForm() {
+    this.newHouseForm = this.formBuilder.group({
+      num: [null, [Validators.required, NumberValidator.validateNumbers]],
+      street: ['', Validators.required],
+      sity: ['', Validators.required],
+      country: ['', Validators.required],
+      postCode: ['', Validators.required],
+    });
   }
 
   onFormSubmit(form: NgForm) { // template-driven form, check if form is valid
@@ -46,12 +72,20 @@ export class AddUpdateHousesComponent implements OnInit {
     form.resetForm();
   }
 
+  private updateHouse(house: House) {
+    this.houseService.update(this.newHouseForm.value, 'Houses')
+    .subscribe(newHouse => {
+      this.houseCreated.emit(newHouse); // sent house to base component becouse of houseCreated event
+      this.clearHouses();
+    });
+  }
   private addHouse(house: House) {
     // Call service to add hosue
-    of<House>()
-      .subscribe(newHouse => {
-        this.houseCreated.emit(newHouse); // sent house to base component becouse of houseCreated event
-        this.clearHouses();
-      });
+    // need to create id
+    this.houseService.add(this.newHouseForm.value, 'Houses')
+    .subscribe(newHouse => {
+      this.houseCreated.emit(newHouse); // sent house to base component becouse of houseCreated event
+      this.clearHouses();
+    });
   }
 }

@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <h2 *ngIf="!house || house.id === undefined">Add </h2>
     <h2 *ngIf="house && house.id !== undefined">Update </h2>
     <p *ngIf="isValidFormSubmitted" class="text-success">
@@ -43,4 +43,34 @@
       </div>
       <button type="submit" class="btn btn-primary">Save</button>
     </form>
+  </div> -->
+  <div>
+    <h2 *ngIf="!house || house.id === undefined">Add </h2>
+    <h2 *ngIf="house && house.id !== undefined">Update </h2>
+    <p *ngIf="isValidFormSubmitted" class="text-success">
+      Form submitted successfully.
+  </p>
+  <form [formGroup]="newHouseForm" (ngSubmit)="addUpdateHouses()">
+    <input type="number" formControlName="num">
+    <div class="text-danger" *ngIf="newHouseForm.get('num').errors && newHouseForm.get('num').touched">
+      Invalid field
+    </div>
+    <input type="text" formControlName="street">
+    <div class="text-danger" *ngIf="newHouseForm.get('street').errors && newHouseForm.get('street').touched">
+      fiel required
+    </div>
+    <input type="text" formControlName="sity">
+    <div class="text-danger" *ngIf="newHouseForm.get('sity').errors && newHouseForm.get('sity').touched">
+      fiel required
+    </div>
+    <input type="text" formControlName="country">
+    <div class="text-danger" *ngIf="newHouseForm.get('country').errors && newHouseForm.get('country').touched">
+      fiel required
+    </div>
+    <input type="text" formControlName="postCode">
+    <div class="text-danger" *ngIf="newHouseForm.get('postCode').errors && newHouseForm.get('postCode').touched">
+      fiel required
+    </div>
+    <button class="btn btn-primary" [disabled]="newHouseForm.invalid">Submit </button>
+  </form>
   </div>

@@ -11,7 +11,7 @@ import { TenantsService } from '../tenants.service';
   styleUrls: ['./add-update-tenants.component.css']
 })
 export class AddUpdateTenantsComponent implements OnInit{
-  constructor() { 
+  constructor() {
     this.clearTenants();
   }
   /**
@@ -51,5 +51,5 @@ export class AddUpdateTenantsComponent implements OnInit{
    */
   private clearTenants() {
     this.tenant = new DefaultTenant();
-  };
+  }
 }

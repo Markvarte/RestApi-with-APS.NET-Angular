@@ -18,12 +18,12 @@ export class HousesService {
    return this.http.get<Array<House>>(this.url + obj, { headers: this.headers });
   }
   public add(payload, obj) {
-    return this.http.post<Array<House>>(this.url + obj, payload, { headers: this.headers });
+    return this.http.post<House>(this.url + obj, payload, { headers: this.headers });
   }
   public remove(payload, obj) {
-    return this.http.delete<Array<House>>(this.url + obj + '/' + payload.id, { headers: this.headers });
+    return this.http.delete<House>(this.url + obj + '/' + payload.id, { headers: this.headers });
   }
   public update(payload, obj) {
-    return this.http.put<Array<House>>(this.url + obj + '/' + payload.id, payload, { headers: this.headers });
+    return this.http.put<House>(this.url + obj + '/' + payload.id, payload, { headers: this.headers });
   }
 }

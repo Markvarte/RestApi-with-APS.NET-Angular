@@ -16,10 +16,15 @@ import { FormControl, ValidationErrors, NG_VALIDATORS, Validator } from '@angula
 })
 
 export class NumberValidator implements Validator {
-  validate(c: FormControl): ValidationErrors | null {
-    if (c.value <= 0) {
-    return {nums : 'Number must be a natural number'};
-    }
+  static validateNumbers(control: FormControl): ValidationErrors {
+    if (control.value <= 0) {
+      return {nums : 'Number must be a natural number'};
+      }
     return null;
   }
+
+  validate(c: FormControl): ValidationErrors | null {
+   return NumberValidator.validateNumbers(c);
+  }
+
 }
