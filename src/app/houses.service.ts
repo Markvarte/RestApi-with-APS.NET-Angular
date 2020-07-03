@@ -10,7 +10,7 @@ import { House } from './houses/house';
 export class HousesService {
   private headers: HttpHeaders;
   private url: string = 'http://localhost:49928/api/';
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   }
 
