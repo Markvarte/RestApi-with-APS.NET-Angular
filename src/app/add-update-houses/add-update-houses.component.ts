@@ -15,7 +15,8 @@ export class AddUpdateHousesComponent implements OnInit {
 
   @Output() houseCreated = new EventEmitter<House>(); // react ang sent to autside data when event HouseCreated
   @Input() house: House; // save data in "house"
-  isValidFormSubmitted = false; // for form validation
+  isValidFormSubmitted = false;
+
   newHouseForm: FormGroup;
   constructor(
     // this.clearHouses(), // methon to create empty obj
@@ -27,6 +28,7 @@ export class AddUpdateHousesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isValidFormSubmitted = false; // for form validation
   }
 
   private clearHouses = () => {
@@ -35,10 +37,11 @@ export class AddUpdateHousesComponent implements OnInit {
 
   public addUpdateHouses() {
     if (this.newHouseForm.valid) {
-      if (this.newHouseForm.value.id === null) {
-        this.addHouse(this.newHouseForm.value);
-      } else {
-        this.updateHouse(this.newHouseForm.value);
+      if (this.newHouseForm.value.id === undefined) {
+      //this.houseCreated.emit(this.newHouseForm.value);
+        this.addHouse(this.newHouseForm.value); //это нужно было по красивому, но оно не работает
+       } else {
+        this.updateHouse(this.newHouseForm.value); //это нужно было по красивому, но оно не работает
       }
       this.isValidFormSubmitted = true; // for message "Form submitted successfully."
       // all types are interface types "House"
