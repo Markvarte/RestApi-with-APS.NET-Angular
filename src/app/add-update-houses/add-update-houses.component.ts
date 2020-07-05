@@ -37,12 +37,12 @@ export class AddUpdateHousesComponent implements OnInit {
 
   public addUpdateHouses() {
     if (this.newHouseForm.valid) {
-      if (this.newHouseForm.value.id === undefined) {
-      //this.houseCreated.emit(this.newHouseForm.value);
-        this.addHouse(this.newHouseForm.value); //это нужно было по красивому, но оно не работает
+     // if (this.newHouseForm.value.id === undefined) {
+      this.houseCreated.emit(this.newHouseForm.value);
+   /*      this.addHouse(this.newHouseForm.value); //это нужно было по красивому, но оно не работает
        } else {
         this.updateHouse(this.newHouseForm.value); //это нужно было по красивому, но оно не работает
-      }
+      } */
       this.isValidFormSubmitted = true; // for message "Form submitted successfully."
       // all types are interface types "House"
       //  this.houseCreated.emit(this.house); // sent house to base component becouse of houseCreated event
