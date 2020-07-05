@@ -51,26 +51,32 @@
       Form submitted successfully.
   </p>
   <form [formGroup]="newHouseForm" (ngSubmit)="addUpdateHouses()">
+    <label>House number:</label>
     <input type="number" formControlName="num">
     <div class="text-danger" *ngIf="newHouseForm.get('num').errors && newHouseForm.get('num').touched">
       Invalid field
     </div>
+    <label>Street:</label>
     <input type="text" formControlName="street">
     <div class="text-danger" *ngIf="newHouseForm.get('street').errors && newHouseForm.get('street').touched">
       fiel required
     </div>
+    <label>Sity:</label>
     <input type="text" formControlName="sity">
     <div class="text-danger" *ngIf="newHouseForm.get('sity').errors && newHouseForm.get('sity').touched">
       fiel required
     </div>
+    <label>Country:</label>
     <input type="text" formControlName="country">
     <div class="text-danger" *ngIf="newHouseForm.get('country').errors && newHouseForm.get('country').touched">
       fiel required
     </div>
+    <label>Post Code:</label>
     <input type="text" formControlName="postCode">
     <div class="text-danger" *ngIf="newHouseForm.get('postCode').errors && newHouseForm.get('postCode').touched">
       fiel required
     </div>
+    <p></p>
     <button class="btn btn-primary" [disabled]="newHouseForm.invalid">Submit </button>
   </form>
   </div>
