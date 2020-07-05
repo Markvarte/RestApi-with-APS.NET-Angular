@@ -15,7 +15,7 @@ export class FlatsComponent implements OnInit { // nu very похоже на э�
     flatService.get().subscribe((data: Array<Flat>) => this.flatsValues = data);
     this.currentFlat = this.getDefaultFlat(); 
   }
-  flatIdForT : number = null;
+  flatIdForT : number = null; // for connected tenants
  
   @Input() flatsValues: Array<Flat>;
   @Input() show: number; // for flat list / contains house id ? - yes

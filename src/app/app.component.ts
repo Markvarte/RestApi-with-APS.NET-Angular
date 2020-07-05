@@ -28,7 +28,7 @@ export class AppComponent {
 
  
 
-  public createUpdateHouse(house: House) {
+ /*  public createUpdateHouse(house: House) {
     let houseWithId = _.find(this.houses, (el => el.id === house.id));
     if (houseWithId) {
       const updateIndex = _.findIndex(this.houses, { id: houseWithId.id });
@@ -46,9 +46,9 @@ export class AppComponent {
       );
     }
     this.currentHouse = this.getDefaultHouse();
-  };
+  }; */
 
-   public editHouse(record: House) {
+ /*   public editHouse(record: House) {
     this.currentHouse = record;
   };
 
@@ -60,6 +60,6 @@ export class AppComponent {
     this.houseService.remove(record, "Houses").subscribe(
       () => this.houses.splice(deleteIndex, 1)
     );
-  }
+  } */
   ngOnInit() { }
 }

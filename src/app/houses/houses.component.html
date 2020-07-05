@@ -21,10 +21,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngIf="house?.length == 0">
+    <tr *ngIf="houses?.length == 0">
       <td>No data</td>
     </tr>
-    <tr *ngFor="let value of house">
+    <tr *ngFor="let value of houses">
       <td>{{ value["id"] }}</td>
       <td>{{ value["num"] }}</td>
       <td>{{ value["street"] }}</td>
@@ -42,6 +42,8 @@
 </table>
 <button type="button" class="btn btn-primary mb-2" (click)="newH($event)">New</button>
 
+<app-add-update-houses (houseCreated)="createUpdateHouse($event)" [house]="currentHouse"></app-add-update-houses>
+     
 
 <div>
   <app-flats [show]="showFlats"></app-flats>
