@@ -25,7 +25,7 @@ export class HousesComponent implements OnInit {
     this.recordDeleted.emit(data);
   }
   public editH(data) {
-    this.editClicked.emit(Object.assign({}, data));
+    this.editClicked.emit(Object.assign({}, data)); 
   }
   public newH(data) { // new is blank for now
     this.newClicked.emit(data);

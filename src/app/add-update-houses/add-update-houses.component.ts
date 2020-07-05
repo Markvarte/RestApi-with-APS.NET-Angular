@@ -19,11 +19,11 @@ export class AddUpdateHousesComponent implements OnInit {
 
   newHouseForm: FormGroup;
   constructor(
-    // this.clearHouses(), // methon to create empty obj
     private formBuilder: FormBuilder,
     private houseService: HousesService,
     private route: ActivatedRoute,
   ) {
+    this.clearHouses();     // methon to create empty obj
     this.createForm();
   }
 
@@ -36,6 +36,7 @@ export class AddUpdateHousesComponent implements OnInit {
   }
 
   public addUpdateHouses() {
+
     if (this.newHouseForm.valid) {
      // if (this.newHouseForm.value.id === undefined) {
       this.houseCreated.emit(this.newHouseForm.value);
@@ -46,7 +47,7 @@ export class AddUpdateHousesComponent implements OnInit {
       this.isValidFormSubmitted = true; // for message "Form submitted successfully."
       // all types are interface types "House"
       //  this.houseCreated.emit(this.house); // sent house to base component becouse of houseCreated event
-      // this.clearHouses();
+      this.clearHouses();
       this.newHouseForm.reset();
     }
   }
@@ -63,7 +64,7 @@ export class AddUpdateHousesComponent implements OnInit {
     });
   }
 
-  onFormSubmit(form: NgForm) { // template-driven form, check if form is valid
+ /*  onFormSubmit(form: NgForm) { // template-driven form, check if form is valid
     console.log('submitted');
     this.isValidFormSubmitted = false;
     if (form.invalid) {
@@ -73,7 +74,7 @@ export class AddUpdateHousesComponent implements OnInit {
     this.isValidFormSubmitted = true;
     console.log('not invalid form');
     form.resetForm();
-  }
+  } */
 
   private updateHouse(house: House) {
     this.houseService.update(this.newHouseForm.value, 'Houses')

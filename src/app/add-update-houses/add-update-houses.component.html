@@ -57,11 +57,11 @@
       Invalid field
     </div>
     <label>Street:</label>
-    <input type="text" formControlName="street">
+    <input type="text" formControlName="street"><br>
     <div class="text-danger" *ngIf="newHouseForm.get('street').errors && newHouseForm.get('street').touched">
       fiel required
     </div>
-    <label>Sity:</label>
+    <label>Sity:  </label><br>
     <input type="text" formControlName="sity">
     <div class="text-danger" *ngIf="newHouseForm.get('sity').errors && newHouseForm.get('sity').touched">
       fiel required
