@@ -21,7 +21,7 @@ export class AddUpdateHousesComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private houseService: HousesService,
-    private route: ActivatedRoute,
+   // private route: ActivatedRoute,
   ) {
     this.clearHouses();     // methon to create empty obj
     this.createForm();
@@ -35,18 +35,22 @@ export class AddUpdateHousesComponent implements OnInit {
     this.house = new DefaultHouse();
   }
 
-  public addUpdateHouses() {
-
+ /*  public addUpdateTemporary() { // for testing
     if (this.newHouseForm.valid) {
-     // if (this.newHouseForm.value.id === undefined) {
       this.houseCreated.emit(this.newHouseForm.value);
-   /*      this.addHouse(this.newHouseForm.value); //это нужно было по красивому, но оно не работает
+      this.isValidFormSubmitted = true;
+      this.clearHouses();
+      this.newHouseForm.reset();
+    }
+  } */
+  public addUpdateHouses() {
+    if (this.newHouseForm.valid) {
+      if (this.newHouseForm.value.id === undefined) {
+         this.addHouse(this.newHouseForm.value); // это нужно было по красивому, но оно не работает
        } else {
-        this.updateHouse(this.newHouseForm.value); //это нужно было по красивому, но оно не работает
-      } */
+        this.updateHouse(this.newHouseForm.value); // это нужно было по красивому, но оно не работает
+      }
       this.isValidFormSubmitted = true; // for message "Form submitted successfully."
-      // all types are interface types "House"
-      //  this.houseCreated.emit(this.house); // sent house to base component becouse of houseCreated event
       this.clearHouses();
       this.newHouseForm.reset();
     }
@@ -86,7 +90,7 @@ export class AddUpdateHousesComponent implements OnInit {
   private addHouse(house: House) {
     // Call service to add hosue
     // need to create id
-    this.houseService.add(this.newHouseForm.value, 'Houses')
+    this.houseService.add(this.newHouseForm.value, "Houses")
     .subscribe(newHouse => {
       this.houseCreated.emit(newHouse); // sent house to base component becouse of houseCreated event
       this.clearHouses();

@@ -26,7 +26,7 @@ export class HousesComponent implements OnInit {
     return new DefaultHouse();
   }
   public createUpdateHouse(house: House) {
-    let houseWithId = _.find(this.houses, (el => el.id === house.id));
+ /*    let houseWithId = _.find(this.houses, (el => el.id === house.id));
     if (houseWithId) {
       const updateIndex = _.findIndex(this.houses, { id: houseWithId.id });
       this.houseService.update(house, "Houses").subscribe(() => {
@@ -42,8 +42,8 @@ export class HousesComponent implements OnInit {
         }
       );
     }
-    this.currentHouse = this.getDefaultHouse();
-  };
+    this.currentHouse = this.getDefaultHouse(); */
+  }
 
   public deleteH(data : House) {
     const deleteIndex = _.findIndex(this.houses, { id: data.id });
