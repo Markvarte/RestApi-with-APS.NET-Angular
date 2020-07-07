@@ -68,7 +68,7 @@ export class AddUpdateHousesComponent implements OnInit {
         console.log(house);
         this.editHouse(house);
         // TODO: Update values on form -->
-        this.house = house; // ?
+      //  this.house = house; // ?
       });
   }
 
@@ -79,8 +79,8 @@ export class AddUpdateHousesComponent implements OnInit {
     this.newHouseForm = this.formBuilder.group({
       num: [null, [Validators.required, NumberValidator.validateNumbers]],
       street: ['', Validators.required],
-      sity: ['', [Validators.required, Validators.pattern('[A-Za-z]')]],
-      country: ['', [Validators.required, Validators.pattern('[A-Za-z]')]],
+      sity: ['', Validators.required],
+      country: ['', Validators.required],
       postCode: ['', Validators.required],
     });
   }
