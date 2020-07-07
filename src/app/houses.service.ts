@@ -17,6 +17,9 @@ export class HousesService {
   public get(obj) {
    return this.http.get<Array<House>>(this.url + obj, { headers: this.headers });
   }
+  public getById(payload) { // that is the id
+    return this.http.get<House>(`${this.url}Houses/${payload}`, { headers: this.headers });
+   }
   public add(payload, obj) {
     return this.http.post<House>(this.url + obj, payload, { headers: this.headers });
   }

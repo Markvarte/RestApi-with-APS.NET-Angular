@@ -24,11 +24,6 @@ import { AddReactiveHouseComponent } from './add-reactive-house/add-reactive-hou
 import { CommonModule } from '@angular/common';
 import { NumberValidator } from './numberValidator/number.validator';
 
-
-const appRoutes: Routes = [
-   { path: '', component: AppComponent } // это там дублирует
-];
-
 @NgModule({
    declarations: [
       AppComponent,
@@ -44,7 +39,6 @@ const appRoutes: Routes = [
       CommonModule,
       FormsModule,
       BrowserModule,
-      RouterModule.forRoot(appRoutes),
       AppRoutingModule,
       ReactiveFormsModule,
       HttpClientModule

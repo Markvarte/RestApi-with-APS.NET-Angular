@@ -4,7 +4,7 @@ import { NgForm, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 import { NumberValidator } from '../numberValidator/number.validator';
 import { HousesService } from '../houses.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-update-houses',
@@ -13,16 +13,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddUpdateHousesComponent implements OnInit {
 
-  // @Output() houseCreated = new EventEmitter<House>(); // react ang sent to autside data when event HouseCreated
   @Input() house: House; // save data in "house"
- // @Input()
   isValidFormSubmitted = false;
 
   newHouseForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
     private houseService: HousesService,
-   // private route: ActivatedRoute,
+    private route: ActivatedRoute,
+    private _router: Router
   ) {
     this.clearHouses();     // methon to create empty obj
     this.createForm();
@@ -30,28 +29,30 @@ export class AddUpdateHousesComponent implements OnInit {
 
   ngOnInit(): void {
     this.isValidFormSubmitted = false; // for form validation
+    this.route.params.subscribe(param => {
+      const houseId = param.id;
+      if (houseId) { // if ID exist => edit, if not => create
+        this.getHouseInfo(houseId); // TODO: If params contains ID then request house info by ID
+      } else {
+        // this._router.navigate(['list']);
+        // Otherwise return back to house list
+      }
+
+      // this.houseService.getHouseById(param.id);
+    });
   }
-/* 
-  public updateForm(data: House) {
- console.log(data);
-  } */
+  /*
+    public updateForm(data: House) {
+   console.log(data);
+    } */
   private clearHouses = () => {
     this.house = new DefaultHouse();
   }
-
- /*  public addUpdateTemporary() { // for testing
-    if (this.newHouseForm.valid) {
-      this.houseCreated.emit(this.newHouseForm.value);
-      this.isValidFormSubmitted = true;
-      this.clearHouses();
-      this.newHouseForm.reset();
-    }
-  } */
   public addUpdateHouses() {
     if (this.newHouseForm.valid) {
       if (this.newHouseForm.value.id === undefined) {
-         this.addHouse(this.newHouseForm.value); // это нужно было по красивому, но оно не работает
-       } else {
+        this.addHouse(this.newHouseForm.value); // это нужно было по красивому, но оно не работает
+      } else {
         this.updateHouse(this.newHouseForm.value); // это нужно было по красивому, но оно не работает
       }
       this.isValidFormSubmitted = true; // for message "Form submitted successfully."
@@ -61,43 +62,55 @@ export class AddUpdateHousesComponent implements OnInit {
   }
 
 
+  private getHouseInfo(houseId: number) {
+    this.houseService.getById(houseId)
+      .subscribe(house => {
+        console.log(house);
+        this.editHouse(house);
+        // TODO: Update values on form -->
+        this.house = house; // ?
+      });
+  }
 
+  editHouse(house: House) { // set value to form
+    this.newHouseForm.patchValue(house); // <-- TODO: Update values on form
+  }
   private createForm() {
     this.newHouseForm = this.formBuilder.group({
       num: [null, [Validators.required, NumberValidator.validateNumbers]],
       street: ['', Validators.required],
-      sity: ['', Validators.required],
-      country: ['', Validators.required],
+      sity: ['', [Validators.required, Validators.pattern('[A-Za-z]')]],
+      country: ['', [Validators.required, Validators.pattern('[A-Za-z]')]],
       postCode: ['', Validators.required],
     });
   }
 
- /*  onFormSubmit(form: NgForm) { // template-driven form, check if form is valid
-    console.log('submitted');
-    this.isValidFormSubmitted = false;
-    if (form.invalid) {
-      console.log('invalid form');
-      return;
-    }
-    this.isValidFormSubmitted = true;
-    console.log('not invalid form');
-    form.resetForm();
-  } */
+  /*  onFormSubmit(form: NgForm) { // template-driven form, check if form is valid
+     console.log('submitted');
+     this.isValidFormSubmitted = false;
+     if (form.invalid) {
+       console.log('invalid form');
+       return;
+     }
+     this.isValidFormSubmitted = true;
+     console.log('not invalid form');
+     form.resetForm();
+   } */
 
   private updateHouse(house: House) {
     this.houseService.update(this.newHouseForm.value, 'Houses')
-    .subscribe(newHouse => {
-      console.log(newHouse); // sent house to base component becouse of houseCreated event
-      //this.clearHouses();
-    });
+      .subscribe(newHouse => {
+        console.log(newHouse);
+        //this.clearHouses();
+      });
   }
   private addHouse(house: House) {
     // Call service to add hosue
     // need to create id
-    this.houseService.add(this.newHouseForm.value, "Houses")
-    .subscribe(newHouse => {
-      console.log(newHouse); // sent house to base component becouse of houseCreated event
-     // this.clearHouses();
-    });
+    this.houseService.add(this.newHouseForm.value, 'Houses')
+      .subscribe(newHouse => {
+        console.log(newHouse); // instead there can be err log
+        // this.clearHouses();
+      });
   }
 }

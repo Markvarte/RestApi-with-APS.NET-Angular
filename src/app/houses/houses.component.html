@@ -34,17 +34,17 @@
       <td> <button type="button" class="btn btn-primary mb-2" (click)="getConnectedFlats(value.id)">view flats</button>
       </td>
       <td>
-        <a href="#" class="m-1" (click)="editH(value)">Edit</a>
+        <a [routerLink]="['/edit',value.id]" class="m-1" >Edit</a>
         <a href="#" class="m-2" (click)="deleteH(value)">Delete</a>
       </td>
     </tr>
   </tbody>
 </table>
-<button type="button" class="btn btn-primary mb-2" (click)="newH($event)">New</button>
+<button type="button" class="btn btn-primary mb-2" (click)="newH($event)"> New </button>
 
-<app-add-update-houses  [house]="currentHouse"></app-add-update-houses>
+<!-- <app-add-update-houses  [house]="currentHouse"></app-add-update-houses> -->
 <!-- (houseCreated)="createUpdateHouse($event)" -->
-     
+
 
 <div>
   <app-flats [show]="showFlats"></app-flats>

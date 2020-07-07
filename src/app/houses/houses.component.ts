@@ -15,7 +15,7 @@ export class HousesComponent implements OnInit {
   @Input() houses: Array<House>;
   public currentHouse: House;
    constructor(private houseService: HousesService) { // don't sure it is necessary
-     houseService.get("Houses").subscribe((data : Array<House>) => this.houses = data); // take array from server
+     houseService.get("Houses").subscribe((data: Array<House>) => this.houses = data); // take array from server
      this.currentHouse = this.getDefaultHouse();
     }
 
@@ -33,7 +33,7 @@ export class HousesComponent implements OnInit {
       const updateIndex = _.findIndex(this.houses, { id: houseWithId.id });
       this.houseService.update(house, "Houses").subscribe(() => {
         this.houses.splice(updateIndex, 1, house);
-      }      
+      }
       );
     } else {
       house.id = this.houses[this.houses.length - 1].id + 1; // solution for Internal server error
@@ -53,13 +53,13 @@ export class HousesComponent implements OnInit {
       () => this.houses.splice(deleteIndex, 1)
     );
   }
-  public editH(data: House) {
+/*   public editH(data: House) {
 
    console.log("Something happend ? ");
    console.log("Data empty ? " + data.country); // no data not empty and function works
    //this.editClicked.emit(data); // was Object.assign({}, data)
 
-  }
+  } */
   public newH(data: House) { // new is blank for now
     this.newClicked.emit(data);
   }
