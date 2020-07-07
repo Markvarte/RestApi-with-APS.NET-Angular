@@ -3,6 +3,8 @@ import { Http } from '@angular/http';
 import { House, DefaultHouse } from './house';
 import { HousesService } from '../houses.service';
 import * as _ from 'lodash';
+import { AddUpdateHousesComponent } from '../add-update-houses/add-update-houses.component';
+
 
 @Component({
   selector: 'app-houses',
@@ -18,14 +20,14 @@ export class HousesComponent implements OnInit {
     }
 
  // @Output() recordDeleted = new EventEmitter<House>(); // sent when click on delete ?
- // @Output() newClicked = new EventEmitter<House>(); // sent when click on new ?
- // @Output() editClicked = new EventEmitter<House>(); // sent when click on edit ?
+  @Output() newClicked = new EventEmitter<House>(); // sent when click on new ?
+  @Output() editClicked = new EventEmitter<House>(); // sent when click on edit ?
   showFlats: number = null; // initial value
  
   private getDefaultHouse() {
     return new DefaultHouse();
   }
-  public createUpdateHouse(house: House) {
+ //  public createUpdateHouse(house: House) {
  /*    let houseWithId = _.find(this.houses, (el => el.id === house.id));
     if (houseWithId) {
       const updateIndex = _.findIndex(this.houses, { id: houseWithId.id });
@@ -43,22 +45,23 @@ export class HousesComponent implements OnInit {
       );
     }
     this.currentHouse = this.getDefaultHouse(); */
-  }
+  // }
 
-  public deleteH(data : House) {
+  public deleteH(data: House) {
     const deleteIndex = _.findIndex(this.houses, { id: data.id });
     this.houseService.remove(data, "Houses").subscribe(
       () => this.houses.splice(deleteIndex, 1)
     );
   }
-  public editH(data : House) {
+  public editH(data: House) {
 
    console.log("Something happend ? ");
    console.log("Data empty ? " + data.country); // no data not empty and function works
-    this.currentHouse = data; // was Object.assign({}, data)
+   //this.editClicked.emit(data); // was Object.assign({}, data)
+
   }
-  public newH(data : House) { // new is blank for now
-    this.currentHouse = data;
+  public newH(data: House) { // new is blank for now
+    this.newClicked.emit(data);
   }
 
   public getConnectedFlats(data: number) {
@@ -84,7 +87,7 @@ export class HousesComponent implements OnInit {
     //  });
 
 
-    this.houseService.get("Houses").subscribe((data : Array<House>) => this.houses = data); // take array from server
+    this.houseService.get("Houses").subscribe((data: Array<House>) => this.houses = data); // take array from server
     this.currentHouse = this.getDefaultHouse();
     }
 }

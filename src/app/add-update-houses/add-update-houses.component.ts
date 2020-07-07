@@ -13,8 +13,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddUpdateHousesComponent implements OnInit {
 
-  @Output() houseCreated = new EventEmitter<House>(); // react ang sent to autside data when event HouseCreated
+  // @Output() houseCreated = new EventEmitter<House>(); // react ang sent to autside data when event HouseCreated
   @Input() house: House; // save data in "house"
+ // @Input()
   isValidFormSubmitted = false;
 
   newHouseForm: FormGroup;
@@ -30,7 +31,10 @@ export class AddUpdateHousesComponent implements OnInit {
   ngOnInit(): void {
     this.isValidFormSubmitted = false; // for form validation
   }
-
+/* 
+  public updateForm(data: House) {
+ console.log(data);
+  } */
   private clearHouses = () => {
     this.house = new DefaultHouse();
   }
@@ -83,8 +87,8 @@ export class AddUpdateHousesComponent implements OnInit {
   private updateHouse(house: House) {
     this.houseService.update(this.newHouseForm.value, 'Houses')
     .subscribe(newHouse => {
-      this.houseCreated.emit(newHouse); // sent house to base component becouse of houseCreated event
-      this.clearHouses();
+      console.log(newHouse); // sent house to base component becouse of houseCreated event
+      //this.clearHouses();
     });
   }
   private addHouse(house: House) {
@@ -92,8 +96,8 @@ export class AddUpdateHousesComponent implements OnInit {
     // need to create id
     this.houseService.add(this.newHouseForm.value, "Houses")
     .subscribe(newHouse => {
-      this.houseCreated.emit(newHouse); // sent house to base component becouse of houseCreated event
-      this.clearHouses();
+      console.log(newHouse); // sent house to base component becouse of houseCreated event
+     // this.clearHouses();
     });
   }
 }

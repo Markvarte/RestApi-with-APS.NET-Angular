@@ -42,7 +42,8 @@
 </table>
 <button type="button" class="btn btn-primary mb-2" (click)="newH($event)">New</button>
 
-<app-add-update-houses (houseCreated)="createUpdateHouse($event)" [house]="currentHouse"></app-add-update-houses>
+<app-add-update-houses  [house]="currentHouse"></app-add-update-houses>
+<!-- (houseCreated)="createUpdateHouse($event)" -->
      
 
 <div>
