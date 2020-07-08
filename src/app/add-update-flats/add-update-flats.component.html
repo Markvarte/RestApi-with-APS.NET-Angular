@@ -1,7 +1,11 @@
+<button type="button" class="btn btn-primary mb-2" (click)="backToFlats()"> Back </button>
 <div>
     <h2 *ngIf="!flat || flat.id === undefined">Add </h2>
     <h2 *ngIf="flat && flat.id !== undefined">Update </h2>
     <form>
+      <div class="form-group">
+        <input name="id" type="number" id="id-input" [(ngModel)]="flat.id" class="form-control" value=null [hidden]='true' />
+      </div>
       <div class="form-group">
         <label for="num-input">Flat number:</label>
         <input name="num" type="number" id="num-input" [(ngModel)]="flat.num" class="form-control" />
@@ -31,6 +35,8 @@
         <input name="houseId" type="number" id="houseId-input" [(ngModel)]="flat.houseId" class="form-control" />
       </div> -->
       <button type="button" class="btn btn-primary" (click)="addUpdateFlats()">Save</button>
+      
+
     </form>
   </div>
 

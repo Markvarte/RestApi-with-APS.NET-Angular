@@ -3,6 +3,7 @@ import { Http } from '@angular/http'
 import { Flat, DefaultFlat } from './flat';
 import { FlatsService } from '../flats.service';
 import * as _ from 'lodash';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-flats',
@@ -11,21 +12,24 @@ import * as _ from 'lodash';
 })
 export class FlatsComponent implements OnInit { // nu very похоже на этот house Component
 
-  constructor(private flatService : FlatsService) {
+  constructor(
+    private flatService: FlatsService,
+    private route: ActivatedRoute
+    ) {
     flatService.get().subscribe((data: Array<Flat>) => this.flatsValues = data);
-    this.currentFlat = this.getDefaultFlat(); 
-  }
-  flatIdForT : number = null; // for connected tenants
- 
+    this.currentFlat = this.getDefaultFlat();
+   }
+  flatIdForT: number = null; // for connected tenants
+
   @Input() flatsValues: Array<Flat>;
-  @Input() show: number; // for flat list / contains house id ? - yes
+  show: number; // for flat list / contains house id ? - yes
   public currentFlat: Flat;
   public getConnectedTenants(data : number) {
     this.flatIdForT = data;
 
   }
 
-  private getDefaultFlat() : Flat {
+  private getDefaultFlat(): Flat {
     return new DefaultFlat();
   }
 
@@ -49,20 +53,22 @@ export class FlatsComponent implements OnInit { // nu very похоже на э�
     this.currentFlat = this.getDefaultFlat();
   };
 
-  public deleteF(data : Flat) {
+  public deleteF(data: Flat) {
     const deleteIndex = _.findIndex(this.flatsValues, { id: data.id });
     this.flatService.remove(data).subscribe(
       () => this.flatsValues.splice(deleteIndex, 1)
     );
   }
-  public editF(data : Flat) {
+  public editF(data: Flat) {
     this.currentFlat = data;
   }
-  public newF(data : Flat) { // cleans form if it contains any info
+  public newF(data: Flat) { // cleans form if it contains any info
     this.currentFlat = data;
   }
     ngOnInit() {
-    
+      this.route.params.subscribe(param => {
+        this.show = param.houseId;
+      });
     }
 
 }

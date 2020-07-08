@@ -1,3 +1,4 @@
+<button type="button" class="btn btn-primary mb-2" [routerLink]="['']"> Back </button>
 <div *ngIf="show">
 
   <div class="row">
@@ -35,15 +36,15 @@
     </tr>
   </tbody>
 </table>
-<button type="button" class="btn btn-primary mb-2" (click)="newF($event)">New</button>
+<button type="button" class="btn btn-primary mb-2" [routerLink]="['/createFlats', show]">New</button>
 </div>
 
 
-<div class="col-md-2">
+<!-- <div class="col-md-2">
   <app-add-update-flats (flatCreated)="createUpdateFlat($event)" [flat]="currentFlat"></app-add-update-flats>
 </div> 
 </div>
-</div>
+</div> -->
 
 <div>
   <app-tenants [TenantVisible]="flatIdForT"></app-tenants>
