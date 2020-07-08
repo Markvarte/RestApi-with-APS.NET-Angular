@@ -50,7 +50,7 @@ export class AddUpdateHousesComponent implements OnInit {
   }
   public addUpdateHouses() {
     if (this.newHouseForm.valid) {
-      if (this.newHouseForm.value.id === undefined) {
+      if (!this.newHouseForm.value.id) {
         this.addHouse(this.newHouseForm.value); // это нужно было по красивому, но оно не работает
       } else {
         this.updateHouse(this.newHouseForm.value); // это нужно было по красивому, но оно не работает
@@ -78,11 +78,11 @@ export class AddUpdateHousesComponent implements OnInit {
   private createForm() {
     this.newHouseForm = this.formBuilder.group({
       id: [null],
-      num: [null, [Validators.required, NumberValidator.validateNumbers]],
-      street: ['', Validators.required],
-      sity: ['', Validators.required],
-      country: ['', Validators.required],
-      postCode: ['', Validators.required],
+      num: [null, [Validators.required, NumberValidator.validateNumbers] ],
+      street: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')] ],
+      sity: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'),  Validators.minLength(3)] ],
+      country: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'),  Validators.minLength(3)] ],
+      postCode: ['', [Validators.required,  Validators.minLength(4)] ],
     });
   }
 

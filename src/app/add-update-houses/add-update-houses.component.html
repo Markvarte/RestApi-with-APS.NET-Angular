@@ -44,42 +44,58 @@
       <button type="submit" class="btn btn-primary">Save</button>
     </form>
   </div> -->
-  <div>
-    <h2 *ngIf="!house || house.id === undefined">Add </h2>
-    <h2 *ngIf="house && house.id !== undefined">Update </h2>
-    <p *ngIf="isValidFormSubmitted" class="alert alert-success">
-      Form submitted successfully.
+  <div class="row">
+    <p>
+    <button class="btn btn-primary" [routerLink]="['']" >Back </button>
+  </p>
+  </div>
+<div>
+  <h2>Houses form </h2>
+  <p *ngIf="isValidFormSubmitted" class="alert alert-success">
+    Form submitted successfully.
   </p>
   <form [formGroup]="newHouseForm" (ngSubmit)="addUpdateHouses()">
-    <input type="number" [hidden]='true' formControlName="id">
-    <label>House number:</label>
-    <input type="number" formControlName="num">
-    <div class="text-danger" *ngIf="newHouseForm.get('num').errors && newHouseForm.get('num').touched">
-      Invalid field
+    <div class="form-group">
+      <div class="row">
+        <input type="number" [hidden]='true' formControlName="id" >
+        <label class="control-label col-md-2">House number:</label>      
+        <input type="number" formControlName="num" >
+        <div class="text-danger" *ngIf="newHouseForm.get('num').errors && newHouseForm.get('num').touched">
+          Invalid field
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Street:</label>
+        <input type="text" formControlName="street">
+        <div class="text-danger" *ngIf="newHouseForm.get('street').errors && newHouseForm.get('street').touched">
+          minimal lenght - 3 characteristics, only letters or spaces
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Sity: </label>
+        <input type="text" formControlName="sity">
+        <div class="text-danger" *ngIf="newHouseForm.get('sity').errors && newHouseForm.get('sity').touched">
+          minimal lenght - 3 characteristics, only letters or spaces
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Country:</label>
+        <input type="text" formControlName="country">
+        <div class="text-danger" *ngIf="newHouseForm.get('country').errors && newHouseForm.get('country').touched">
+          minimal lenght - 3 characteristics, only letters or spaces
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Post Code:</label>
+        <input type="text" formControlName="postCode">
+        <div class="text-danger" *ngIf="newHouseForm.get('postCode').errors && newHouseForm.get('postCode').touched">
+          minimal lenght - 4 characteristics
+        </div>
+      </div>
     </div>
-    <label>Street:</label>
-    <input type="text" formControlName="street"><br>
-    <div class="text-danger" *ngIf="newHouseForm.get('street').errors && newHouseForm.get('street').touched">
-      fiel required
-    </div>
-    <label>Sity:  </label><br>
-    <input type="text" formControlName="sity">
-    <div class="text-danger" *ngIf="newHouseForm.get('sity').errors && newHouseForm.get('sity').touched">
-      fiel required
-    </div>
-    <label>Country:</label>
-    <input type="text" formControlName="country">
-    <div class="text-danger" *ngIf="newHouseForm.get('country').errors && newHouseForm.get('country').touched">
-      fiel required
-    </div>
-    <label>Post Code:</label>
-    <input type="text" formControlName="postCode">
-    <div class="text-danger" *ngIf="newHouseForm.get('postCode').errors && newHouseForm.get('postCode').touched">
-      fiel required
-    </div>
-    <p></p>
     <button class="btn btn-primary" [disabled]="newHouseForm.invalid">Submit </button>
+
   </form>
-  </div>
+</div>
 
 <!--   <app-houses [hidden] (editClicked)="updateForm($event)"></app-houses> -->
