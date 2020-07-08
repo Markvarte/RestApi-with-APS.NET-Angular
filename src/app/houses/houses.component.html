@@ -31,7 +31,7 @@
       <td>{{ value["sity"] }}</td>
       <td>{{ value["country"] }}</td>
       <td>{{ value["postCode"] }}</td>
-      <td> <button type="button" class="btn btn-primary mb-2" (click)="getConnectedFlats(value.id)">view flats</button>
+      <td> <button type="button" class="btn btn-primary mb-2" [routerLink]="['/flats',value.id]">view flats</button>
       </td>
       <td>
         <a [routerLink]="['/edit',value.id]" class="m-1" >Edit</a>
@@ -45,7 +45,7 @@
 <!-- <app-add-update-houses  [house]="currentHouse"></app-add-update-houses> -->
 <!-- (houseCreated)="createUpdateHouse($event)" -->
 
-
+<!-- 
 <div>
-  <app-flats [show]="showFlats"></app-flats>
-</div>
+  <app-flats [hidden]='true' [show]="showFlats"></app-flats>
+</div> -->
