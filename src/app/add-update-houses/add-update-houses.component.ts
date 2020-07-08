@@ -21,7 +21,7 @@ export class AddUpdateHousesComponent implements OnInit {
     private formBuilder: FormBuilder,
     private houseService: HousesService,
     private route: ActivatedRoute,
-    private _router: Router
+    private router: Router
   ) {
     this.clearHouses();     // methon to create empty obj
     this.createForm();
@@ -34,7 +34,7 @@ export class AddUpdateHousesComponent implements OnInit {
       if (houseId) { // if ID exist => edit, if not => create
         this.getHouseInfo(houseId); // TODO: If params contains ID then request house info by ID
       } else {
-        // this._router.navigate(['list']);
+        // this.router.navigate(['list']);
         // Otherwise return back to house list
       }
 
