@@ -60,9 +60,9 @@ export class HousesComponent implements OnInit {
    //this.editClicked.emit(data); // was Object.assign({}, data)
 
   } */
-  public newH(data: House) { // new is blank for now
+ /*  public newH(data: House) { // new is blank for now
     this.newClicked.emit(data);
-  }
+  } */
 
   public getConnectedFlats(data: number) {
     this.showFlats = data;
