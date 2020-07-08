@@ -51,6 +51,7 @@
       Form submitted successfully.
   </p>
   <form [formGroup]="newHouseForm" (ngSubmit)="addUpdateHouses()">
+    <input type="number" [hidden]='true' formControlName="id">
     <label>House number:</label>
     <input type="number" formControlName="num">
     <div class="text-danger" *ngIf="newHouseForm.get('num').errors && newHouseForm.get('num').touched">

@@ -73,10 +73,11 @@ export class AddUpdateHousesComponent implements OnInit {
   }
 
   editHouse(house: House) { // set value to form
-    this.newHouseForm.patchValue(house); // <-- TODO: Update values on form
+    this.newHouseForm.patchValue(house); // <-- TODO: Update values on form // patch becouse of field "flat", wich don't exist in angular
   }
   private createForm() {
     this.newHouseForm = this.formBuilder.group({
+      id: [null],
       num: [null, [Validators.required, NumberValidator.validateNumbers]],
       street: ['', Validators.required],
       sity: ['', Validators.required],
