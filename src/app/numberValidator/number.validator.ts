@@ -11,8 +11,7 @@ import { FormControl, ValidationErrors, NG_VALIDATORS, Validator } from '@angula
 
 @Component({
   selector: 'app-number-validator',
-  templateUrl: './validation-functions.component.html',
-  styleUrls: ['./validation-functions.component.css']
+  templateUrl: './number.validator.html'
 })
 
 export class NumberValidator implements Validator {
