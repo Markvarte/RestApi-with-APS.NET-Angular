@@ -10,15 +10,14 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './flats.component.html',
   styleUrls: ['./flats.component.css']
 })
-export class FlatsComponent implements OnInit { // nu very похоже на этот house Component
+export class FlatsComponent implements OnInit {
 
   constructor(
     private flatService: FlatsService,
     private route: ActivatedRoute
-    ) {
-    flatService.get().subscribe((data: Array<Flat>) => this.flatsValues = data);
+  ) {
     this.currentFlat = this.getDefaultFlat();
-   }
+  }
   flatIdForT: number = null; // for connected tenants
 
   @Input() flatsValues: Array<Flat>;
@@ -34,7 +33,7 @@ export class FlatsComponent implements OnInit { // nu very похоже на э�
   }
 
   public createUpdateFlat(flat: Flat) {
-    flat.houseId = this.show; // inicialize in new object house id 
+    flat.houseId = +this.show; // inicialize in new object house id 
     let flatWithId = _.find(this.flatsValues, (el => el.id === flat.id));
     if (flatWithId) {
       const updateIndex = _.findIndex(this.flatsValues, { id: flatWithId.id });
@@ -51,7 +50,7 @@ export class FlatsComponent implements OnInit { // nu very похоже на э�
       );
     }
     this.currentFlat = this.getDefaultFlat();
-  };
+  }
 
   public deleteF(data: Flat) {
     const deleteIndex = _.findIndex(this.flatsValues, { id: data.id });
@@ -62,13 +61,20 @@ export class FlatsComponent implements OnInit { // nu very похоже на э�
   public editF(data: Flat) {
     this.currentFlat = data;
   }
-/*   public newF(data: Flat) { // cleans form if it contains any info
-    this.currentFlat = data;
-  } */
-    ngOnInit() {
-      this.route.params.subscribe(param => {
-        this.show = param.houseId;
-      });
-    }
+  /*   public newF(data: Flat) { // cleans form if it contains any info
+      this.currentFlat = data;
+    } */
+  ngOnInit() {
+    this.route.params.subscribe(param => {
+      this.show = +param.houseId;
+    });
+    this.flatService.get().subscribe(
+      (data: Array<Flat>) => {
+        this.flatsValues = data;
+        console.log(data);
+      }
+    );
+    console.log('flat array on init: ' + this.flatsValues);
+  }
 
 }

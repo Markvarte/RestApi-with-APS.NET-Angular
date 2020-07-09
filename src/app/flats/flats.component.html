@@ -1,42 +1,41 @@
 <button type="button" class="btn btn-primary mb-2" [routerLink]="['']"> Back </button>
-<div *ngIf="show">
 
-  <div class="row">
-  <div class="col-md-10">
+<div class="row">
   <h2> Connected flats</h2>
-<table class="table mt-5">
-  <thead>
-    <tr>
-      <th scope="col">Id </th>
-      <th scope="col">Number </th>
-      <th scope="col">Floor </th>
-      <th scope="col">Rooms Count </th>
-      <th scope="col">Tenants Count </th>
-      <th scope="col">Total area </th>
-      <th scope="col">Living area </th>
-      <th scope="col">House ID </th> 
-      <th scope="col">Tenants </th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let value of flatsValues">
-      <tr *ngIf="value['houseId'] === show">
-      <td>{{ value["id"] }}</td>
-      <td>{{ value["num"] }}</td>
-      <td>{{ value["floor"] }}</td>
-      <td>{{ value["roomsCount"] }}</td>
-      <td>{{ value["tenantsCount"] }}</td>
-      <td>{{ value["totalArea"] }}</td>
-      <td>{{ value["livingArea"] }}</td>
-       <td>{{ value["houseId"] }}</td>
-       <td> <button type="button" class="btn btn-primary mb-2" (click)="getConnectedTenants(value.id)">view tenants</button> </td> 
-      <td>
-        <a href="#" class="m-1" (click)="editF(value)">Edit</a>
-        <a href="#" class="m-2" (click)="deleteF(value)">Delete</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<button type="button" class="btn btn-primary mb-2" [routerLink]="['/createFlats', show]">New</button>
+  <table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Id </th>
+        <th scope="col">Number </th>
+        <th scope="col">Floor </th>
+        <th scope="col">Rooms Count </th>
+        <th scope="col">Tenants Count </th>
+        <th scope="col">Total area </th>
+        <th scope="col">Living area </th>
+        <th scope="col">House ID </th>
+        <th scope="col">Tenants </th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let value of flatsValues">
+      <tr *ngIf="value.houseId === show">
+        <td>{{ value.id }}</td>
+        <td>{{ value.num }}</td>
+        <td>{{ value["floor"] }}</td>
+        <td>{{ value["roomsCount"] }}</td>
+        <td>{{ value["tenantsCount"] }}</td>
+        <td>{{ value["totalArea"] }}</td>
+        <td>{{ value["livingArea"] }}</td>
+        <td>{{ value["houseId"] }}</td>
+        <td> <button type="button" class="btn btn-primary mb-2" (click)="getConnectedTenants(value.id)">view
+            tenants</button> </td>
+        <td>
+          <a href="#" class="m-1" (click)="editF(value)">Edit</a>
+          <a href="#" class="m-2" (click)="deleteF(value)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary mb-2" [routerLink]="['/createFlats', show]">New</button>
 </div>
 
 
@@ -49,4 +48,3 @@
 <div>
   <app-tenants [TenantVisible]="flatIdForT"></app-tenants>
 </div>
-

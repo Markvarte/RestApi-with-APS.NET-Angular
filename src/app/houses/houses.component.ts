@@ -22,8 +22,6 @@ export class HousesComponent implements OnInit {
     houseService.get("Houses").subscribe((data: Array<House>) => this.houses = data); // take array from server
     this.currentHouse = this.getDefaultHouse();
     }
-
-  // @Output() recordDeleted = new EventEmitter<House>(); // sent when click on delete ?
   @Output() newClicked = new EventEmitter<House>(); // sent when click on new ?
   @Output() editClicked = new EventEmitter<House>(); // sent when click on edit ?
   showFlats: number = null; // initial value
@@ -68,10 +66,10 @@ export class HousesComponent implements OnInit {
      this.newClicked.emit(data);
    } */
 
-  public getConnectedFlats(data: number) {
+ /*  public getConnectedFlats(data: number) {
     this.showFlats = data;
     this.router.navigate(['flats']);
-  }
+  } */
 
   // getHouses(): void {
   //  this.houseService.get().subscribe((houses : House) => this.housesValues = houses);
