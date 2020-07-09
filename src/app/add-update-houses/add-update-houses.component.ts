@@ -28,7 +28,7 @@ export class AddUpdateHousesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isValidFormSubmitted = false; // for form validation
+    //this.isValidFormSubmitted = false; // for form validation
     this.route.params.subscribe(param => {
       const houseId = param.id;
       if (houseId) { // if ID exist => edit, if not => create
@@ -41,10 +41,6 @@ export class AddUpdateHousesComponent implements OnInit {
       // this.houseService.getHouseById(param.id);
     });
   }
-  /*
-    public updateForm(data: House) {
-   console.log(data);
-    } */
   private clearHouses = () => {
     this.house = new DefaultHouse();
   }

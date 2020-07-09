@@ -24,7 +24,7 @@ export class FlatsComponent implements OnInit { // nu very похоже на э�
   @Input() flatsValues: Array<Flat>;
   show: number; // for flat list / contains house id ? - yes
   public currentFlat: Flat;
-  public getConnectedTenants(data : number) {
+  public getConnectedTenants(data: number) {
     this.flatIdForT = data;
 
   }
@@ -62,9 +62,9 @@ export class FlatsComponent implements OnInit { // nu very похоже на э�
   public editF(data: Flat) {
     this.currentFlat = data;
   }
-  public newF(data: Flat) { // cleans form if it contains any info
+/*   public newF(data: Flat) { // cleans form if it contains any info
     this.currentFlat = data;
-  }
+  } */
     ngOnInit() {
       this.route.params.subscribe(param => {
         this.show = param.houseId;

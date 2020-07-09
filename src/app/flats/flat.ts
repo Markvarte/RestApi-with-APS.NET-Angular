@@ -1,7 +1,7 @@
 export interface Flat {
 
     id: number;
-    num: string;
+    num: number;
     floor: number;
     roomsCount: number;
     tenantsCount: number;
@@ -11,7 +11,7 @@ export interface Flat {
 }
 export class DefaultFlat implements Flat {
     id: number = null;
-    num: string = '';
+    num: number = null;
     floor: number = null;
     roomsCount: number = null;
     tenantsCount: number = null;
