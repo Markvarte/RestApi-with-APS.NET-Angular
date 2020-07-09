@@ -1,5 +1,5 @@
 <button type="button" class="btn btn-primary mb-2" (click)="backToFlats()"> Back </button>
-<div>
+<!-- <div>
     <h2 *ngIf="!flat || flat.id === undefined">Add </h2>
     <h2 *ngIf="flat && flat.id !== undefined">Update </h2>
     <form>
@@ -30,13 +30,68 @@
         <label for="livingArea-input">Living area:</label>
         <input name="livingArea" type="number" id="livingArea-input" [(ngModel)]="flat.livingArea" class="form-control" />
       </div>
-      <!-- <div class="form-group">
+       <div class="form-group">
         <label for="houseId-input">HouseId:</label>
         <input name="houseId" type="number" id="houseId-input" [(ngModel)]="flat.houseId" class="form-control" />
-      </div> -->
+      </div> 
       <button type="button" class="btn btn-primary" (click)="addUpdateFlats()">Save</button>
       
 
     </form>
-  </div>
+  </div> -->
+<div>
+  <h2>Flats form </h2>
+ <!--  <p *ngIf="isValidFormSubmitted" class="alert alert-success"> -->
+    <!-- Form submitted successfully.
+  </p> -->
+  <form [formGroup]="newFlatForm" (ngSubmit)="addUpdateFlats()">
+    <div class="form-group">
+      <div class="row">
+        <input type="number" [hidden]='true' formControlName="id">
+        <label class="control-label col-md-2">Flat number:</label>      
+        <input type="number" formControlName="num" >
+        <div class="text-danger" *ngIf="newFlatForm.get('num').errors && newFlatForm.get('num').touched">
+          required natural number
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Floor:</label>
+        <input type="number" formControlName="floor">
+        <div class="text-danger" *ngIf="newFlatForm.get('floor').errors && newFlatForm.get('floor').touched">
+          required natural number
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Rooms count: </label>
+        <input type="number" formControlName="roomsCount">
+        <div class="text-danger" *ngIf="newFlatForm.get('roomsCount').errors && newFlatForm.get('roomsCount').touched">
+          required natural number
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Tenants count:</label>
+        <input type="number" formControlName="tenantsCount">
+        <div class="text-danger" *ngIf="newFlatForm.get('tenantsCount').errors && newFlatForm.get('tenantsCount').touched">
+          required natural number
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Total area:</label>
+        <input type="number" formControlName="totalArea">
+        <div class="text-danger" *ngIf="newFlatForm.get('totalArea').errors && newFlatForm.get('totalArea').touched">
+          required natural number
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Living area:</label>
+        <input type="number" formControlName="livingArea">
+        <div class="text-danger" *ngIf="newFlatForm.get('livingArea').errors && newFlatForm.get('livingArea').touched">
+          required natural number
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" [disabled]="newFlatForm.invalid">Submit </button>
+
+  </form>
+</div>
 
