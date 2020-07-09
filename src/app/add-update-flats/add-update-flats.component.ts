@@ -22,7 +22,7 @@ export class AddUpdateFlatsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
     ) {
-    //this.clearFlat();
+    this.clearFlat(); // that is necessary thing for default values added
     this.createForm();
     }
 
