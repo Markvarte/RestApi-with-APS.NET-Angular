@@ -1,6 +1,9 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Flat, DefaultFlat } from '../flats/flat';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FlatsService } from '../flats.service';
+import { NumberValidator } from '../numberValidator/number.validator';
 
 @Component({
   selector: 'app-add-update-flats',
@@ -10,18 +13,34 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AddUpdateFlatsComponent implements OnInit {
   @Output() flatCreated = new EventEmitter<Flat>();
   @Input() flat: Flat;
+  newFlatForm: FormGroup; // reactive form name
 
  // houseId: number;
   constructor(
+    private formBuilder: FormBuilder,
+    private flatService: FlatsService,
     private route: ActivatedRoute,
     private router: Router
     ) {
-    this.clearFlat();
+    //this.clearFlat();
+    this.createForm();
     }
 
   ngOnInit(): void {
     this.route.params.subscribe(param => {
+      console.log("houseId: " + param.houseId);
       this.flat.houseId = param.houseId;
+    });
+  }
+  private createForm() {
+    this.newFlatForm = this.formBuilder.group({
+      id: [null],
+      num: [null, [Validators.required, NumberValidator.validateNumbers] ],
+      floor: [null, [Validators.required, NumberValidator.validateNumbers] ],
+      roomsCount: [null, [Validators.required, NumberValidator.validateNumbers] ],
+      tenantsCount: [null, [Validators.required, NumberValidator.validateNumbers] ],
+      totalArea: [null, [Validators.required, NumberValidator.validateNumbers] ],
+      livingArea: [null, [Validators.required, NumberValidator.validateNumbers] ]
     });
   }
 
