@@ -81,7 +81,9 @@ export class HousesComponent implements OnInit {
   //   this.housesValues = h;
   // })
   // }
-
+/* public moveToFlatList() {
+  this.router.navigate(['/flats', 1], { queryParams: {refresh: new Date().getTime()} }); // 1 - just to test // in html comp was = [routerLink]="['/flats',value.id]"
+} */
   ngOnInit() {
     // this.getHouses();
     //  this._httpService.get(this.accessPointUrl).subscribe(val => { // json returns from server

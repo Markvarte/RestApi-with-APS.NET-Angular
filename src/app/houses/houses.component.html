@@ -25,27 +25,19 @@
       <td>No data</td>
     </tr>
     <tr *ngFor="let value of houses">
-      <td>{{ value["id"] }}</td>
-      <td>{{ value["num"] }}</td>
-      <td>{{ value["street"] }}</td>
-      <td>{{ value["sity"] }}</td>
-      <td>{{ value["country"] }}</td>
-      <td>{{ value["postCode"] }}</td>
+      <td>{{ value.id }}</td>
+      <td>{{ value.num }}</td>
+      <td>{{ value.street }}</td>
+      <td>{{ value.sity }}</td>
+      <td>{{ value.country }}</td>
+      <td>{{ value.postCode }}</td>
       <td> <button type="button" class="btn btn-primary mb-2" [routerLink]="['/flats',value.id]">view flats</button>
       </td>
       <td>
-        <a [routerLink]="['/edit',value.id]" class="m-1" >Edit</a>
+        <a [routerLink]="['/edit',value.id]" class="m-1">Edit</a>
         <a href="#" class="m-2" (click)="deleteH(value)">Delete</a>
       </td>
     </tr>
   </tbody>
 </table>
 <button type="button" class="btn btn-primary mb-2" [routerLink]="['/create']"> New </button>
-
-<!-- <app-add-update-houses  [house]="currentHouse"></app-add-update-houses> -->
-<!-- (houseCreated)="createUpdateHouse($event)" -->
-
-<!-- 
-<div>
-  <app-flats [hidden]='true' [show]="showFlats"></app-flats>
-</div> -->
