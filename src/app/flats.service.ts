@@ -15,6 +15,10 @@ export class FlatsService {
   public get() {
     return this.http.get<Array<Flat>>(this.url, { headers: this.headers });
   }
+
+  public getByHouseId(houseId: number) {
+    return this.http.get<Array<Flat>>(this.url + '/House/' + houseId, { headers: this.headers });
+  }
   public add(payload) {
     return this.http.post<Array<Flat>>(this.url, payload, { headers: this.headers });
   }
