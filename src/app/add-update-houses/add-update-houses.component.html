@@ -51,7 +51,7 @@
   </div>
 <div>
   <h2>Houses form </h2>
-  <p *ngIf="isValidFormSubmitted" class="alert alert-success">
+  <p *ngIf="isValidFormSubmitted && newHouseForm.pristine" class="alert alert-success">
     Form submitted successfully.
   </p>
   <form [formGroup]="newHouseForm" (ngSubmit)="addUpdateHouses()">
