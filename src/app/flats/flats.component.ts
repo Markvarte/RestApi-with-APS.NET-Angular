@@ -58,8 +58,8 @@ export class FlatsComponent implements OnInit {
     this.flatService.remove(data).subscribe(
       () => {
         this.flatsValues.splice(deleteIndex, 1);
-        this.router.navigate(['flats', this.show]);
-      }
+        location.reload(); // but "would completely destroy all stored states, including WebSocket connections." >>
+      } // source -> https://github.com/vuejs/vue-router/issues/311
     );
   }
   public editF(data: Flat) {
