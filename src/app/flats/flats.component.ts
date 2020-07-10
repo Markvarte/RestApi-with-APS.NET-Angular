@@ -59,11 +59,10 @@ export class FlatsComponent implements OnInit {
       () => {
         this.flatsValues.splice(deleteIndex, 1);
         location.reload(); // but "would completely destroy all stored states, including WebSocket connections." >>
-      } // source -> https://github.com/vuejs/vue-router/issues/311
+      // source -> https://github.com/vuejs/vue-router/issues/311
+      // + there still is a problem, when delete is pressed more that 1 time
+      }
     );
-  }
-  public editF(data: Flat) {
-    this.currentFlat = data;
   }
 
   ngOnInit() {
