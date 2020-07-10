@@ -24,6 +24,8 @@ import { AddReactiveHouseComponent } from './add-reactive-house/add-reactive-hou
 import { CommonModule } from '@angular/common';
 import { NumberValidator } from './numberValidator/number.validator';
 
+
+
 @NgModule({
    declarations: [
       AppComponent,

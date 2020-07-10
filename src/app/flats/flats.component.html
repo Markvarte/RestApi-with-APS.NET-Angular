@@ -17,33 +17,24 @@
       </tr>
     </thead>
     <tbody *ngFor="let value of flatsValues">
-      <tr *ngIf="value.houseId === show">
-        <td>{{ value.id }}</td>
-        <td>{{ value.num }}</td>
-        <td>{{ value["floor"] }}</td>
-        <td>{{ value["roomsCount"] }}</td>
-        <td>{{ value["tenantsCount"] }}</td>
-        <td>{{ value["totalArea"] }}</td>
-        <td>{{ value["livingArea"] }}</td>
-        <td>{{ value["houseId"] }}</td>
-        <td> <button type="button" class="btn btn-primary mb-2" (click)="getConnectedTenants(value.id)">view
-            tenants</button> </td>
-        <td>
-          <a href="#" class="m-1" (click)="editF(value)">Edit</a>
-          <a href="#" class="m-2" (click)="deleteF(value)">Delete</a>
-        </td>
-      </tr>
+      <td>{{ value.id }}</td>
+      <td>{{ value.num }}</td>
+      <td>{{ value.floor }}</td>
+      <td>{{ value.roomsCount }}</td>
+      <td>{{ value.tenantsCount }}</td>
+      <td>{{ value.totalArea }}</td>
+      <td>{{ value.livingArea }}</td>
+      <td>{{ value.houseId }}</td>
+      <td> <button type="button" class="btn btn-primary mb-2" (click)="getConnectedTenants(value.id)">view
+          tenants</button> </td>
+      <td>
+        <a href="#" class="m-1" (click)="editF(value)">Edit</a>
+        <a href="#" class="m-2" (click)="deleteF(value)">Delete</a>
+      </td>
     </tbody>
   </table>
   <button type="button" class="btn btn-primary mb-2" [routerLink]="['/createFlats', show]">New</button>
 </div>
-
-
-<!-- <div class="col-md-2">
-  <app-add-update-flats (flatCreated)="createUpdateFlat($event)" [flat]="currentFlat"></app-add-update-flats>
-</div> 
-</div>
-</div> -->
 
 <div>
   <app-tenants [TenantVisible]="flatIdForT"></app-tenants>
