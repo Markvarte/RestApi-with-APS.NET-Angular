@@ -28,7 +28,7 @@
       <td> <button type="button" class="btn btn-primary mb-2" (click)="getConnectedTenants(value.id)">view
           tenants</button> </td>
       <td>
-        <a href="#" class="m-1" (click)="editF(value)">Edit</a>
+        <a href="#" class="m-1" [routerLink]="['/editFlats',value.id, value.houseId]">Edit</a>
         <a href="#" class="m-2" (click)="deleteF(value)">Delete</a>
       </td>
     </tbody>

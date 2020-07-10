@@ -28,10 +28,29 @@ export class AddUpdateFlatsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+        // if ID exist => edit, if not => create
+ 
     this.route.params.subscribe(param => {
       console.log("houseId: " + param.houseId);
       this.flat.houseId = parseInt(param.houseId, 10); // parse to int decimal string value
+      this.flat.id = param.id;
+      if (this.flat.id) {
+        this.getFlatInfo(this.flat.id);
+      }
     });
+  }
+
+  private getFlatInfo(flatId: number){
+    this.flatService.getById(flatId)
+    .subscribe(flat => {
+      console.log(flat);
+      this.editFlatForm(flat);
+      // TODO: Update values on form -->
+    });
+  }
+
+  editFlatForm(flat: Flat) {
+    this.newFlatForm.patchValue(flat);
   }
   private createForm() {
     this.newFlatForm = this.formBuilder.group({
@@ -41,7 +60,8 @@ export class AddUpdateFlatsComponent implements OnInit {
       roomsCount: [null, [Validators.required, NumberValidator.validateNumbers]],
       tenantsCount: [null, [Validators.required, NumberValidator.validateNumbers]],
       totalArea: [null, [Validators.required, NumberValidator.validateNumbers]],
-      livingArea: [null, [Validators.required, NumberValidator.validateNumbers]]
+      livingArea: [null, [Validators.required, NumberValidator.validateNumbers]],
+      houseId: [null]
     });
   }
 

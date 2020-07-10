@@ -15,7 +15,9 @@ export class FlatsService {
   public get() {
     return this.http.get<Array<Flat>>(this.url, { headers: this.headers });
   }
-
+  public getById(id: number) {
+    return this.http.get<Flat>(this.url + '/' + id, { headers: this.headers });
+  }
   public getByHouseId(houseId: number) {
     return this.http.get<Array<Flat>>(this.url + '/House/' + houseId, { headers: this.headers });
   }

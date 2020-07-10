@@ -12,7 +12,8 @@ const appRoutes: Routes = [
   {path: 'edit/:id', component: AddUpdateHousesComponent},
   {path: '', redirectTo: '/list', pathMatch: 'full'},
   {path: 'flats/:houseId', component: FlatsComponent},
-  {path: 'createFlats/:houseId', component: AddUpdateFlatsComponent}
+  {path: 'createFlats/:houseId', component: AddUpdateFlatsComponent},
+  {path: 'editFlats/:id/:houseId', component: AddUpdateFlatsComponent}
 ];
 
 @NgModule({
