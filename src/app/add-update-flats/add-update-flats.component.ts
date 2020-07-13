@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Flat, DefaultFlat } from '../flats/flat';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { FlatsService } from '../flats.service';
 import { NumberValidator } from '../numberValidator/number.validator';
 
@@ -28,25 +28,22 @@ export class AddUpdateFlatsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-        // if ID exist => edit, if not => create
- 
+    // if ID exist => edit, if not => create
     this.route.params.subscribe(param => {
-      console.log("houseId: " + param.houseId);
       this.flat.houseId = parseInt(param.houseId, 10); // parse to int decimal string value
-      this.flat.id = param.id;
+      this.flat.id = parseInt(param.id, 10);
       if (this.flat.id) {
         this.getFlatInfo(this.flat.id);
       }
     });
   }
 
-  private getFlatInfo(flatId: number){
+  private getFlatInfo(flatId: number) {
     this.flatService.getById(flatId)
-    .subscribe(flat => {
-      console.log(flat);
-      this.editFlatForm(flat);
-      // TODO: Update values on form -->
-    });
+      .subscribe(flat => {
+        this.editFlatForm(flat);
+        // TODO: Update values on form -->
+      });
   }
 
   editFlatForm(flat: Flat) {
@@ -54,14 +51,14 @@ export class AddUpdateFlatsComponent implements OnInit {
   }
   private createForm() {
     this.newFlatForm = this.formBuilder.group({
-      id: [null],
+      id: [null], // hidden
       num: [null, [Validators.required, NumberValidator.validateNumbers]],
       floor: [null, [Validators.required, NumberValidator.validateNumbers]],
       roomsCount: [null, [Validators.required, NumberValidator.validateNumbers]],
       tenantsCount: [null, [Validators.required, NumberValidator.validateNumbers]],
       totalArea: [null, [Validators.required, NumberValidator.validateNumbers]],
       livingArea: [null, [Validators.required, NumberValidator.validateNumbers]],
-      houseId: [null]
+      houseId: [null] // hidden
     });
   }
 
@@ -71,6 +68,7 @@ export class AddUpdateFlatsComponent implements OnInit {
   private clearFlat() {
     this.flat = new DefaultFlat();
   }
+
   public addUpdateFlats() { // all types are interface types //event: Flat -> parametrs needed ? - no
     if (this.newFlatForm.valid) {
       if (!this.newFlatForm.value.id) {
@@ -79,7 +77,6 @@ export class AddUpdateFlatsComponent implements OnInit {
         this.updateFlat(this.newFlatForm.value); // это нужно было по красивому, но оно не работает
       }
       this.isValidFormSubmitted = true; // for message "Form submitted successfully."
-      //this.clearHouses();
       this.newFlatForm.reset();
     }
   }
