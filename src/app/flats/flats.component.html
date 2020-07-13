@@ -29,11 +29,11 @@
           tenants</button> </td>
       <td>
         <a href="#" class="m-1" [routerLink]="['/editFlats',value.id, value.houseId]">Edit</a>
-        <a href="#" class="m-2" (click)="deleteF(value)">Delete</a>
+        <a href="#" class="m-2" [routerLink]="['/deleteFlats',value.id, value.houseId]">Delete</a>
       </td>
     </tbody>
   </table>
-  <button type="button" class="btn btn-primary mb-2" [routerLink]="['/createFlats', show]">New</button>
+  <button type="button" class="btn btn-primary mb-2" [routerLink]="['/createFlats', currentHouseId]">New</button>
 </div>
 
 <div>
