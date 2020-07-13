@@ -1,1 +1,43 @@
-<p>delete-flats works!</p>
+<button type="button" class="btn btn-primary mb-2" (click)="backToFlats()"> Back </button>
+
+<div>
+    <h2>Are you sure wants to delete this info ? </h2>
+<!--    <p *ngIf="isValidFormSubmitted && newFlatForm.pristine" class="alert alert-success"> 
+      Form submitted successfully.
+    </p>  -->
+    <form [formGroup]="newFlatForm" (ngSubmit)="deleteFlat()">
+      <div class="form-group">
+        <div class="row">
+          <input type="number" [hidden]='true' formControlName="id">
+          <label class="control-label col-md-2">Flat number:</label>      
+          <input type="number" formControlName="num" >
+        
+        </div>
+        <div class="row">
+          <label class="control-label col-md-2">Floor:</label>
+          <input type="number" formControlName="floor">
+        </div>
+          <input type="number" [hidden]='true' formControlName="houseId">
+        <div class="row">
+          <label class="control-label col-md-2">Rooms count: </label>
+          <input type="number"  formControlName="roomsCount">
+      
+        </div>
+        <div class="row">
+          <label class="control-label col-md-2">Tenants count:</label>
+          <input type="number" formControlName="tenantsCount" >
+        </div>
+        <div class="row">
+          <label class="control-label col-md-2">Total area:</label>
+          <input type="number"  formControlName="totalArea">
+
+        </div>
+        <div class="row">
+          <label class="control-label col-md-2">Living area:</label>
+          <input type="number" formControlName="livingArea">
+        </div>
+      </div>
+      <button class="btn btn-danger" [disabled]="newFlatForm.invalid">Delete </button>
+  
+    </form>
+  </div>
