@@ -25,17 +25,14 @@
       <td>{{ value.totalArea }}</td>
       <td>{{ value.livingArea }}</td>
       <td>{{ value.houseId }}</td>
-      <td> <button type="button" class="btn btn-primary mb-2" (click)="getConnectedTenants(value.id)">view
+      <td> <button type="button" class="btn btn-primary mb-2" [routerLink]="['ten']" routerLinkActive="active">view
           tenants</button> </td>
       <td>
-        <a href="#" class="m-1" [routerLink]="['/editFlats',value.id, value.houseId]">Edit</a>
-        <a href="#" class="m-2" [routerLink]="['/deleteFlats',value.id, value.houseId]">Delete</a>
+        <a class="m-1" [routerLink]="['/editFlats',value.id, value.houseId]">Edit</a>
+        <a class="m-2" [routerLink]="['/deleteFlats',value.id, value.houseId]">Delete</a>
       </td>
     </tbody>
   </table>
   <button type="button" class="btn btn-primary mb-2" [routerLink]="['/createFlats', currentHouseId]">New</button>
 </div>
-
-<div>
-  <app-tenants [TenantVisible]="flatIdForT"></app-tenants>
-</div>
+<router-outlet></router-outlet>
