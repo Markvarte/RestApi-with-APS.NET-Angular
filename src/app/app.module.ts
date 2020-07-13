@@ -23,6 +23,7 @@ import { AddUpdateTenantsComponent } from './add-update-tenants/add-update-tenan
 import { AddReactiveHouseComponent } from './add-reactive-house/add-reactive-house.component';
 import { CommonModule } from '@angular/common';
 import { NumberValidator } from './numberValidator/number.validator';
+import { DeleteFlatsComponent } from './delete-flats/delete-flats.component';
 
 
 
@@ -35,7 +36,8 @@ import { NumberValidator } from './numberValidator/number.validator';
       AddUpdateHousesComponent,
       AddUpdateFlatsComponent,
       AddUpdateTenantsComponent,
-      AddReactiveHouseComponent
+      AddReactiveHouseComponent,
+      DeleteFlatsComponent
    ],
    imports: [
       CommonModule,
