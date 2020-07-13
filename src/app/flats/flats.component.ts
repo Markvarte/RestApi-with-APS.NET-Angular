@@ -60,7 +60,6 @@ export class FlatsComponent implements OnInit {
         console.log(data);
       }
     );
-    console.log('flat array on init: ' + this.flatsValues);
   }
 
 }

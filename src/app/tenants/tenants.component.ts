@@ -23,7 +23,7 @@ export class TenantsComponent implements OnInit {
   private getDefaultTenant() {
     return new DefaultTenant();
   }
-
+// [ '../list/view', country.countryId ], { relativeTo: this.route }
   public createUpdateTenant(data: Tenant) {
 
     data.flatId = this.TenantVisible;
@@ -31,7 +31,7 @@ export class TenantsComponent implements OnInit {
     if (tenantWithId) {
       const updateIndex = _.findIndex(this.tenant, { id: tenantWithId.id });
       this.tenantService.update(data).subscribe(() => {
-        this.tenant.splice(updateIndex, 1, data)
+        this.tenant.splice(updateIndex, 1, data);
       });
     } else {
       data.id = this.tenant[this.tenant.length - 1].id + 1; // solution for Internal server error
